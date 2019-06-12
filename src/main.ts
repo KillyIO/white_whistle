@@ -4,6 +4,21 @@ import router from './router';
 import store from './store';
 import './registerServiceWorker';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faSearch,
+  faGlobe,
+  faMapMarkedAlt,
+  faUsers,
+  faScroll,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faSearch, faGlobe, faMapMarkedAlt, faUsers, faScroll, faPlus);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.config.productionTip = false;
 
 new Vue({
