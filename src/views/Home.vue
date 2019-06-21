@@ -19,9 +19,13 @@ import Utils from '@/utils/index.ts';
 export default class Home extends Vue {
   private utils: Utils = new Utils();
 
+  private created() {
+    console.log(this.$route.name);
+  }
+
   // Remove this method on production
   private printHomePath() {
-    console.log(`HOMEPATH: ${this.utils.get_user_homepath() + '\\'}`);
+    console.log(`HOMEPATH: ${this.utils.getUserHomePath() + '\\'}`);
   }
 }
 </script>

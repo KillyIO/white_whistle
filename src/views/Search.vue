@@ -14,11 +14,15 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
+/* tslint:disable:no-console */
 
-  export default Vue.extend({
+import Vue from 'vue';
 
-  });
+export default class Search extends Vue {
+  private created() {
+    console.log(this.$route.name);
+  }
+}
 </script>
 
 <style scoped>

@@ -7,13 +7,14 @@
 /* tslint:disable:no-console */
 
 import Vue from 'vue';
+import Component from 'vue-class-component';
 
-export default Vue.extend({
-  created() {
-    const currentUrl = window.location.pathname;
-    console.log(currentUrl);
-  },
-});
+@Component({})
+export default class Worlds extends Vue {
+  private created() {
+    console.log(this.$route.name);
+  }
+}
 </script>
 
 <style scoped>

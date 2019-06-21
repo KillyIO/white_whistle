@@ -6,16 +6,25 @@ import './registerServiceWorker';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faSearch,
   faGlobe,
+  faHome,
   faMapMarkedAlt,
-  faUsers,
-  faScroll,
   faPlus,
+  faScroll,
+  faSearch,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faSearch, faGlobe, faMapMarkedAlt, faUsers, faScroll, faPlus);
+library.add(
+  faGlobe,
+  faHome,
+  faMapMarkedAlt,
+  faPlus,
+  faScroll,
+  faSearch,
+  faUsers,
+);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

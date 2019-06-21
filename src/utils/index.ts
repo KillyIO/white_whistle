@@ -5,26 +5,44 @@ import { ensureDir } from 'fs-extra';
 export default class Utils {
 
   /**
-   * create_ww_dir
+   * getWhiteWhistlePath
    */
-  // public create_ww_dir() {
-  //   const dir = join(this.get_user_homepath(), 'white-whistle');
-  //   ensureDir(dir)
-  //   .then(() => {
-
-  //   });
-  // }
+  public getWhiteWhistlePath(): string {
+    return join(this.getUserHomePath(), '.white-whistle');
+  }
 
   /**
-   * open_ww_dir
+   * getWorldsSubfolder
    */
-  // public open_ww_dir() {
+  public getWorldsSubfolder() {
+    return join(this.getWhiteWhistlePath(), 'worlds');
+  }
 
-  // }
   /**
-   * get_user_homepath
+   * getLocationsSubfolder
    */
-  private get_user_homepath(): string {
+  public getLocationsSubfolder() {
+    return join(this.getWhiteWhistlePath(), 'locations');
+  }
+
+  /**
+   * getCharactersSubfolder
+   */
+  public getCharactersSubfolder() {
+    return join(this.getWhiteWhistlePath(), 'characters');
+  }
+
+  /**
+   * getArtifactsSubfolder
+   */
+  public getArtifactsSubfolder() {
+    return join(this.getWhiteWhistlePath(), 'artifacts');
+  }
+
+  /**
+   * getUserHomePath
+   */
+  public getUserHomePath(): string {
     return homedir();
   }
 }
