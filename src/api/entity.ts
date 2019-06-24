@@ -1,4 +1,6 @@
 export default interface Entity {
-  getID(): number;
-  setID(ID: number): void;
+  Id: number;
+  Name?: string;
+  ImageUrl?: string;
+  Created: number;
 }

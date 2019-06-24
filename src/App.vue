@@ -1,53 +1,24 @@
 <template>
-  <div id="app" class="flex min-h-screen">
-    <!-- remove bg-red-600 in release -->
-    <div class="w-24 fixed min-h-screen flex justify-center items-center">
-      <ul>
-        <router-link tag="li" to="/home" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="home" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/worlds" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="globe" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/locations" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="map-marked-alt" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/characters" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="users" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/artifacts" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="scroll" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/configuration" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="plus" />
-          </a>
-        </router-link>
-        <router-link tag="li" to="/search" class="mb-10 text-gray-900">
-          <a>
-            <font-awesome-icon icon="search" />
-          </a>
-        </router-link>
-      </ul>
-    </div>
-
-    <div class="w-full ml-24">
-      <div class="container mx-auto">
-        <router-view/>
-      </div>
-    </div>
+  <div id="app">
+    <AppSidebar />
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+import AppSidebar from '@/components/AppSidebar.vue';
+
+@Component({
+  components: {
+    AppSidebar,
+  },
+})
+export default class App extends Vue {
+}
+</script>
+
 
 <style src="./css/main.css">
 </style>

@@ -6,23 +6,27 @@ import './registerServiceWorker';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+  faArrowLeft,
   faGlobe,
   faHome,
   faMapMarkedAlt,
   faPlus,
   faScroll,
   faSearch,
+  faTimes,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(
+  faArrowLeft,
   faGlobe,
   faHome,
   faMapMarkedAlt,
   faPlus,
   faScroll,
   faSearch,
+  faTimes,
   faUsers,
 );
 

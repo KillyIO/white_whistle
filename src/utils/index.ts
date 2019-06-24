@@ -1,8 +1,24 @@
+/* tslint:disable:no-console */
 import { homedir } from 'os';
 import { join } from 'path';
-import { ensureDir } from 'fs-extra';
+import {
+  ensureFile,
+  outputJson,
+  readJson,
+  ensureFileSync,
+  outputJsonSync,
+} from 'fs-extra';
+
+import { World } from '@/api';
 
 export default class Utils {
+
+  /**
+   * getUserHomePath
+   */
+  public getUserHomePath(): string {
+    return homedir();
+  }
 
   /**
    * getWhiteWhistlePath
@@ -12,37 +28,57 @@ export default class Utils {
   }
 
   /**
-   * getWorldsSubfolder
+   * getConfigFilePath
    */
-  public getWorldsSubfolder() {
+  public getConfigFilePath() {
+    return join(this.getWhiteWhistlePath(), 'config.json');
+  }
+
+  /**
+   * getWorldsSubfolderPath
+   */
+  public getWorldsSubfolderPath() {
     return join(this.getWhiteWhistlePath(), 'worlds');
   }
 
   /**
-   * getLocationsSubfolder
+   * getLocationsSubfolderPath
    */
-  public getLocationsSubfolder() {
+  public getLocationsSubfolderPath() {
     return join(this.getWhiteWhistlePath(), 'locations');
   }
 
   /**
-   * getCharactersSubfolder
+   * getCharactersSubfolderPath
    */
-  public getCharactersSubfolder() {
+  public getCharactersSubfolderPath() {
     return join(this.getWhiteWhistlePath(), 'characters');
   }
 
   /**
-   * getArtifactsSubfolder
+   * getArtifactsSubfolderPath
    */
-  public getArtifactsSubfolder() {
+  public getArtifactsSubfolderPath() {
     return join(this.getWhiteWhistlePath(), 'artifacts');
   }
 
   /**
-   * getUserHomePath
+   * convertName
    */
-  public getUserHomePath(): string {
-    return homedir();
+  public convertName(fullName: string|string[]): string {
+    if (typeof fullName === 'string') {
+      return fullName.toLowerCase().replace(/ /g, '_');
+    } else {
+      return fullName.join(' ');
+    }
+  }
+
+  /**
+   * saveWorld
+   */
+  public saveWorld(filePath: string, world: World): void {
+    outputJsonSync(filePath, world);
+    const data = readJson(filePath);
+    // console.log(data);
   }
 }

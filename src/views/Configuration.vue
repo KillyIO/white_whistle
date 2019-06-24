@@ -1,6 +1,6 @@
 
 <template>
-  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke">
+  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
     <!-- Put the logo here -->
     <div class="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-center">
       <h2>{{ messageComputed }}</h2>
@@ -13,18 +13,42 @@
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import store from '@/store';
 
-import { ensureDir } from 'fs-extra';
+import { join } from 'path';
+import {
+  ensureDir,
+  ensureFile,
+  pathExists,
+  readdir,
+  readJson,
+  outputJson,
+  pathExistsSync,
+  outputJsonSync,
+  readJsonSync,
+  ensureDirSync,
+  readdirSync,
+} from 'fs-extra';
 
+import { World } from '@/api';
 import Utils from '@/utils';
 
 type fn = () => void;
 
 @Component({})
 export default class Configuration extends Vue {
-  private configMessage: string = '';
-  private configMethods: fn[] = [];
-  private utils: Utils = new Utils();
+  private configMessage: string;
+  private configMethods: fn[];
+  private utils: Utils;
+  private worlds: World[];
+
+  constructor() {
+    super();
+    this.configMessage = '';
+    this.configMethods = [];
+    this.utils = new Utils();
+    this.worlds = [];
+  }
 
   private created() {
     this.configMethods.push(() => {
@@ -33,6 +57,10 @@ export default class Configuration extends Vue {
 
     this.configMethods.push(() => {
       this.checkLatestUpdates();
+    });
+
+    this.configMethods.push(() => {
+      this.checkConfigFile();
     });
 
     this.configMethods.push(() => {
@@ -49,7 +77,6 @@ export default class Configuration extends Vue {
   }
 
   private mounted() {
-    console.log(this.configMethods.length);
     for (const met of this.configMethods) {
       met();
     }
@@ -64,66 +91,94 @@ export default class Configuration extends Vue {
     this.configMessage = 'Checking for updates';
   }
 
+  private checkConfigFile(): void {
+    this.configMessage = 'Checking configuration file';
+
+    const configPath = this.utils.getConfigFilePath();
+
+    const configExists = pathExistsSync(configPath);
+
+    if (configExists) {
+      const data = readJsonSync(configPath);
+      this.$store
+      .dispatch('setWorldId', data.worldId)
+      .then(() => {
+        this.configMessage = 'App\'s configuration checking successful';
+      }).catch((err) => {
+        throw err;
+      });
+    } else {
+      outputJsonSync(configPath, {
+        worldId: 1,
+      });
+      const data = readJsonSync(configPath);
+      console.log(data);
+    }
+  }
+
   private checkWhiteWhistleFolder(): void {
     this.configMessage = 'Checking for app folder';
 
     const dir = this.utils.getWhiteWhistlePath();
-    ensureDir(dir)
-    .then(() => {
-      this.configMessage = 'App folder\'s checking successful';
-    }).catch((err: unknown) => {
-      console.error(err);
-      this.configMessage = 'A problem occured when checking for app folder';
+
+    ensureDirSync(dir);
+    this.configMessage = 'App folder\'s checking successful';
+  }
+
+  private checkWorldsSubfolder(): void {
+    const worldsDir = this.utils.getWorldsSubfolderPath();
+
+    ensureDirSync(worldsDir);
+    this.configMessage = 'worlds subfolder\'s checking successful';
+
+    this.configMessage = 'Retrieving worlds\' data';
+
+    const dirList = readdirSync(worldsDir);
+    dirList.forEach((el) => {
+      const filePath: string = join(worldsDir, el);
+
+      const data: object = readJsonSync(filePath);
+      const world: World = new World(data);
+
+      this.$store
+      .dispatch('addWorld', world)
+      .then(() => {
+        this.configMessage = `${this.utils.convertName(el)} retrieved`;
+      })
+      .catch((err) => {
+        throw err;
+      });
     });
+  }
+
+  private checkLocationsSubfolder(): void {
+    const locationsDir = this.utils.getLocationsSubfolderPath();
+
+    ensureDirSync(locationsDir);
+    this.configMessage = 'locations subfolder\'s checking successful';
+  }
+
+  private checkCharactersSubfolder(): void {
+    const charactersDir = this.utils.getCharactersSubfolderPath();
+
+    ensureDirSync(charactersDir);
+    this.configMessage = 'characters subfolder\'s checking successful';
+  }
+
+  private checkArtifactsSubfolder(): void {
+    const artifactsDir = this.utils.getArtifactsSubfolderPath();
+
+    ensureDirSync(artifactsDir);
+    this.configMessage = 'artifacts subfolder\'s checking successful';
   }
 
   private checkSubfolder(): void {
     this.configMessage = 'Checking for app subfolders';
 
-    const worldsDir = this.utils.getWorldsSubfolder();
-    const locationDir = this.utils.getLocationsSubfolder();
-    const charactersDir = this.utils.getCharactersSubfolder();
-    const artifactsDir = this.utils.getArtifactsSubfolder();
-
-    // worlds folder
-    ensureDir(worldsDir)
-    .then(() => {
-      this.configMessage = 'worlds subfolder\'s checking successful';
-    })
-    .catch((err) => {
-      console.error(err);
-      this.configMessage = 'A problem occured when checking for worlds\' subfolder';
-    });
-
-    // locations folder
-    ensureDir(locationDir)
-    .then(() => {
-      this.configMessage = 'locations subfolder\'s checking successful';
-    })
-    .catch((err) => {
-      console.error(err);
-      this.configMessage = 'A problem occured when checking for locations\' subfolder';
-    });
-
-    // characters folder
-    ensureDir(charactersDir)
-    .then(() => {
-      this.configMessage = 'characters subfolder\'s checking successful';
-    })
-    .catch((err) => {
-      console.error(err);
-      this.configMessage = 'A problem occured when checking for characters\' subfolder';
-    });
-
-    // artifacts folder
-    ensureDir(artifactsDir)
-    .then(() => {
-      this.configMessage = 'artifacts subfolder\'s checking successful';
-    })
-    .catch((err) => {
-      console.error(err);
-      this.configMessage = 'A problem occured when checking for artifacts\' subfolder';
-    });
+    this.checkWorldsSubfolder();
+    this.checkLocationsSubfolder();
+    this.checkCharactersSubfolder();
+    this.checkArtifactsSubfolder();
   }
 
   private closeConfiguration() {

@@ -1,53 +1,76 @@
 import Entity from './entity';
 
 interface Genesis {
-  age_?: number;
-  creation_?: unknown;
-
-  getAge(): number;
-  setAge(age: number): void;
-  getCreation(): unknown;
-  setCreation(creation: unknown): void;
+  Age?: number;
+  Creation?: string;
 }
 
-// interface IWorldPhysics {
-//   earth_like: boolean;
-//   earth_like_desc: unknown;
-//   multi_sun: boolean;
-//   sun_nbr: number;
-//   sun_names: unknown[];
-//   sky_day_desc: unknown;
-//   sky_night_desc: unknown;
-//   season_nbr: number;
-//   season_names: unknown[];
-// }
+interface IWorld extends Entity, Genesis {
+}
 
-// interface IWorld {
-//   name: string;
-// }
-
-export default class World implements Entity {
-  private ID_: number;
-  private NAME_: unknown;
-
-  constructor(ID: number, name: unknown) {
-    this.ID_ = ID;
-    this.NAME_ = name;
+export class World {
+  public static fromJSON(json: string): World {
+    const jsonObject = JSON.parse(json);
+    return new World(jsonObject);
   }
 
-  public getID(): number {
-    return this.ID_;
+  private Id!: number;
+  private Name?: string;
+  private ImageUrl?: string;
+  private Created!: number;
+
+  private Age?: number;
+  private Creation?: string;
+
+  constructor(data?: Partial<IWorld>) {
+    Object.assign(this, data);
   }
 
-  public setID(ID: number): void {
-    this.ID_ = ID;
+  public getId(): number {
+    return this.Id;
   }
 
-  public getName(): unknown {
-    return this.NAME_;
+  public setId(id: number): void {
+    this.Id = id;
   }
 
-  public setName(name: unknown): void {
-    this.NAME_ = name;
+  public getImageUrl(): string | unknown {
+    return this.ImageUrl;
+  }
+
+  public setImageUrl(url: string): void {
+    this.ImageUrl = url;
+  }
+
+  public getCreated(): number {
+    return this.Created;
+  }
+
+  public setCreated(date: number): void {
+    this.Created = date;
+  }
+
+  public getName(): string | unknown {
+    return this.Name;
+  }
+
+  public setName(name: string): void {
+    this.Name = name;
+  }
+
+  public getAge(): number | unknown {
+    return this.Age;
+  }
+
+  public setAge(age: number) {
+    this.Age = age;
+  }
+
+  public getCreation(): string | unknown {
+    return this.Creation;
+  }
+
+  public setCreation(creation: string) {
+    this.Creation = creation;
   }
 }
