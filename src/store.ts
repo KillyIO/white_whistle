@@ -38,8 +38,8 @@ export default new Vuex.Store({
   getters: {
     getWorldId: (state) => state.worldId,
     getWorlds: (state) => state.worlds,
-    getWorldById: (state) => (Id: number) => {
-      return state.worlds.find((item) => item.getId() === Id);
+    getWorldById: (state, getters) => (Id: number) => {
+      return getters.getWorlds.find((item: World) => item.getId() === Id);
     },
   },
 });

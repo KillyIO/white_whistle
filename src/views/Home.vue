@@ -36,13 +36,11 @@ import { World } from '../api';
 })
 export default class Home extends Vue {
   private utils: Utils;
-  // private letters: string[];
   private entities: World[];
 
   constructor() {
     super();
     this.utils = new Utils();
-    // this.letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i));
     this.entities = [];
   }
 
@@ -53,10 +51,6 @@ export default class Home extends Vue {
   public get entitiesComputed(): World[] {
     return this.entities;
   }
-
-  // public get lettersComputed(): string[] {
-  //   return this.letters;
-  // }
 
   // Remove this method on production
   private printHomePath() {

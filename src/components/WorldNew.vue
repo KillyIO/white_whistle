@@ -11,7 +11,7 @@
         </section>
         <section>
           <div class="shadow flex">
-            <input @change="onFileChange" type="file" name="" class="w-full rounded p-2">
+            <input @change="onFileChange($event.target.files[0])" type="file" name="" class="w-full rounded p-2">
           </div>
           <div>
             <img v-if="ImageUrl" :src="ImageUrl" alt="world profile pic" class="w-40 h-40">
@@ -55,6 +55,7 @@ import {
 
 import Utils from '@/utils';
 import { World } from '@/api';
+import { read, close } from 'fs';
 
 @Component({})
 export default class WorldNew extends Vue {
@@ -85,10 +86,13 @@ export default class WorldNew extends Vue {
     console.log(this.$router.currentRoute);
   }
 
-  private onFileChange(e: any) {
-    const file = e.target.files[0];
-    this.ImageUrl = URL.createObjectURL(file);
-    console.log(this.ImageUrl);
+  private onFileChange(file: any) {
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (event: any) => {
+      this.ImageUrl = event.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   private onCreate(): void {

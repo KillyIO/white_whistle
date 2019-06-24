@@ -40,7 +40,12 @@ export default new Router({
       path: '/worlds/:Id/edit',
       name: 'edit-world',
       component: WorldEdit,
-      props: true,
+      props: (route) => {
+        const Id = Number.parseInt(route.params.Id, 10);
+        return {
+          Id,
+        };
+      },
     },
     // {
     //   path: '/locations',

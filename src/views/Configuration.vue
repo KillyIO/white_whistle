@@ -82,7 +82,7 @@ export default class Configuration extends Vue {
     }
   }
 
-  public get messageComputed(): string {
+  private get messageComputed(): string {
     return this.configMessage;
   }
 
