@@ -20,6 +20,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { webFrame } from 'electron';
 
+webFrame.setZoomFactor(1.0);
+webFrame.setVisualZoomLevelLimits(1, 1);
+
 library.add(
   faArrowLeft,
   faGlobe,
@@ -35,9 +38,6 @@ library.add(
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
-
-webFrame.setZoomFactor(1.0);
-webFrame.setVisualZoomLevelLimits(1, 1);
 
 new Vue({
   router,

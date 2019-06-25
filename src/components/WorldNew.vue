@@ -1,6 +1,8 @@
 <template>
-  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
-    <div class="w-full max-w-xl bg-white shadow-lg rounded-lg p-8">
+<!-- fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker -->
+  <div class="">
+    <!-- w-full max-w-xl bg-white shadow-lg rounded-lg p-8 -->
+    <div class="">
 
       <div class="flex">
         <section >

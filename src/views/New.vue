@@ -1,35 +1,16 @@
 <template>
-  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
-    <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8 text-center">
-      <h1>Hey, something new in mind, huh?</h1>
-      <ul class="flex">
-        <router-link tag="li" :to="{name: 'new-world'}" class="flex-1 mr-2">
-          <a>
-            <h1>World</h1>
-            <button >Create a world</button>
-          </a>
-        </router-link>
-        <router-link tag="li" to="" class="flex-1 mr-2">
-          <a>
-            <h1>Location</h1>
-            <button>Create a location</button>
-          </a>
-        </router-link>
-        <router-link tag="li" to="" class="flex-1 mr-2">
-          <a>
-            <h1>Character</h1>
-            <button>Create a character</button>
-          </a>
-        </router-link>
-        <router-link tag="li" to="" class="flex-1 mr-2">
-          <a>
-            <h1>Artifact</h1>
-            <button>Create a artifact</button>
-          </a>
-        </router-link>
+<!-- fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker -->
+  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darkest">
+    <!-- w-full max-w-3xl bg-white shadow-lg rounded-lg p-8 text-center -->
+    <div class="w-11/12 bg-white shadow-lg rounded-lg p-8 text-center">
+      <h1 class="text-lg font-bold pb-8">HEY, SOMETHING NEW IN MIND, HUH?</h1>
+      <ul class="flex justify-around">
+        <!-- make a compenent for new 'something' card -->
+        <new-entity-card v-for="entity in entities" :key="entity.id" :toLink="entity.toLink" :entityType="entity.entityType">
+        </new-entity-card>
       </ul>
     </div>
-    <router-view/>>
+    <router-view/>
   </div>
 </template>
 
@@ -39,8 +20,26 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-@Component({})
+import NewEntityCard from '@/components/NewEntityCard.vue';
+
+interface EntityCard {
+  toLink: string;
+  entityType: string;
+}
+
+@Component({
+  components: {
+    NewEntityCard,
+  },
+})
 export default class New extends Vue {
+  private worldBackgroundUrl: string = require('@/assets/stephane-wootha-richard-l-autre-bout-du-monde.jpg');
+  private entities: EntityCard[] = [
+    { toLink: 'new-world', entityType: 'world' },
+    { toLink: 'new-region', entityType: 'region' },
+    { toLink: 'new-character', entityType: 'character' },
+    { toLink: 'new-artifact', entityType: 'artifact' }];
+
   private created() {
     console.log(this.$route.name);
   }
