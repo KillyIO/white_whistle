@@ -1,9 +1,12 @@
 <template>
   <div>
     <ul>
-      <li v-for="world in worldsComputed" :key="world.id">
+      <li v-for="world in worldsComputed" :key="world.getId()">
         <img :src="world.getImageUrl()" alt="altText"/>
         <h1>{{ world.getName() }}</h1>
+        <button @click.prevent="onClickEdit(world.getId())">
+          Edit
+        </button>
       </li>
     </ul>
   </div>
@@ -31,6 +34,15 @@ export default class Worlds extends Vue {
 
   private get worldsComputed(): World[] {
     return this.worlds;
+  }
+
+  private onClickEdit(worldId: number) {
+    this.$router.push({
+      name: 'world-profile',
+      params: {
+        Id: worldId.toString(),
+      },
+    });
   }
 }
 </script>

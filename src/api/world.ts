@@ -34,8 +34,8 @@ export class World {
     this.Id = id;
   }
 
-  public getImageUrl(): string | unknown {
-    return this.ImageUrl;
+  public getImageUrl(): string {
+    return this.ImageUrl as string;
   }
 
   public setImageUrl(url: string): void {
@@ -50,27 +50,27 @@ export class World {
     this.Created = date;
   }
 
-  public getName(): string | unknown {
-    return this.Name;
+  public getName(): string {
+    return this.Name as string;
   }
 
   public setName(name: string): void {
     this.Name = name;
   }
 
-  public getAge(): number | unknown {
-    return this.Age;
+  public getAge(): number {
+    return this.Age as number;
   }
 
-  public setAge(age: number) {
+  public setAge(age: number): void {
     this.Age = age;
   }
 
-  public getCreation(): string | unknown {
-    return this.Creation;
+  public getCreation(): string {
+    return this.Creation as string;
   }
 
-  public setCreation(creation: string) {
+  public setCreation(creation: string): void {
     this.Creation = creation;
   }
 }

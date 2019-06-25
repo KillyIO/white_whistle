@@ -9,7 +9,6 @@ import Worlds from '@/views/Worlds.vue';
 import New from '@/views/New.vue';
 import WorldNew from '@/components/WorldNew.vue';
 import WorldProfile from '@/components/WorldProfile.vue';
-import WorldEdit from '@/components/WorldEdit.vue';
 // import Search from './views/Search.vue';
 
 Vue.use(Router);
@@ -32,14 +31,9 @@ export default new Router({
       component: Worlds,
     },
     {
-      path: '/worlds/:id',
+      path: '/worlds/:Id',
       name: 'world-profile',
       component: WorldProfile,
-    },
-    {
-      path: '/worlds/:Id/edit',
-      name: 'edit-world',
-      component: WorldEdit,
       props: (route) => {
         const Id = Number.parseInt(route.params.Id, 10);
         return {

@@ -79,6 +79,5 @@ export default class Utils {
   public saveWorld(filePath: string, world: World): void {
     outputJsonSync(filePath, world);
     const data = readJson(filePath);
-    // console.log(data);
   }
 }

@@ -11,7 +11,7 @@
         </section>
         <section>
           <div class="shadow flex">
-            <input @change="onFileChange($event.target.files[0])" type="file" name="" class="w-full rounded p-2">
+            <input @change="onImageChange($event.target.files[0])" type="file" name="" class="w-full rounded p-2">
           </div>
           <div>
             <img v-if="ImageUrl" :src="ImageUrl" alt="world profile pic" class="w-40 h-40">
@@ -59,15 +59,15 @@ import { read, close } from 'fs';
 
 @Component({})
 export default class WorldNew extends Vue {
-  private utils: Utils;
+  private utils: Utils = new Utils();
   private Id: number;
-  private Name: string;
-  private ImageUrl: string;
-  private Created: number;
+  private Name: string = '';
+  private ImageUrl: string = '';
+  private Created: number = 0;
 
   constructor() {
     super();
-    this.utils = new Utils();
+
     this.Id = this.$store.getters.getWorldId;
 
     // modify world Id in configuration file
@@ -75,10 +75,6 @@ export default class WorldNew extends Vue {
     outputJsonSync(this.utils.getConfigFilePath(), {
       worldId: this.$store.getters.getWorldId,
     });
-
-    this.ImageUrl = '';
-    this.Created = 0;
-    this.Name = '';
   }
 
   private created() {
@@ -86,7 +82,7 @@ export default class WorldNew extends Vue {
     console.log(this.$router.currentRoute);
   }
 
-  private onFileChange(file: any) {
+  private onImageChange(file: any) {
     const reader: FileReader = new FileReader();
 
     reader.onload = (event: any) => {
@@ -115,7 +111,7 @@ export default class WorldNew extends Vue {
     this.$store.dispatch('addWorld', newWorld)
     .then(() => {
       this.$router.replace({
-        name: 'edit-world',
+        name: 'world-profile',
         params: {
           Id: this.Id.toString(),
         },

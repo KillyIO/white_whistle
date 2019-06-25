@@ -15,6 +15,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import store from '@/store';
 
+import { remote } from 'electron';
 import { join } from 'path';
 import {
   ensureDir,
@@ -37,20 +38,15 @@ type fn = () => void;
 
 @Component({})
 export default class Configuration extends Vue {
-  private configMessage: string;
-  private configMethods: fn[];
-  private utils: Utils;
-  private worlds: World[];
-
-  constructor() {
-    super();
-    this.configMessage = '';
-    this.configMethods = [];
-    this.utils = new Utils();
-    this.worlds = [];
-  }
+  private configMessage: string = '';
+  private configMethods: fn[] = [];
+  private utils: Utils = new Utils();
+  private worlds: World[] = [];
 
   private created() {
+    const mainScreen: Electron.Display = remote.screen.getPrimaryDisplay();
+    console.log(mainScreen);
+    // console.log(`${dimensions.width}, ${dimensions.height}`);
     this.configMethods.push(() => {
       this.configMessage = 'Launching application';
     });
