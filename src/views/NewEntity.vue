@@ -1,12 +1,18 @@
 <template>
 <!-- fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker -->
-  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darkest">
+  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
     <!-- w-full max-w-3xl bg-white shadow-lg rounded-lg p-8 text-center -->
-    <div class="w-11/12 bg-white shadow-lg rounded-lg p-8 text-center">
+    <div v-click-outside.capture="onClose" class="w-auto bg-white shadow-lg rounded-lg py-8 px-4 text-center">
+      <!-- <button ref="button" @click="onClose" class="text-gray-800">
+        <font-awesome-icon icon="times"></font-awesome-icon>
+      </button> -->
       <h1 class="text-lg font-bold pb-8">HEY, SOMETHING NEW IN MIND, HUH?</h1>
       <ul class="flex justify-around">
-        <!-- make a compenent for new 'something' card -->
-        <new-entity-card v-for="entity in entities" :key="entity.id" :toLink="entity.toLink" :entityType="entity.entityType">
+        <new-entity-card
+          v-for="entity in entities"
+          :key="entity.id"
+          :toLink="entity.toLink"
+          :entityType="entity.entityType">
         </new-entity-card>
       </ul>
     </div>
@@ -19,6 +25,7 @@
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import * as vClickOutside from 'v-click-outside-x';
 
 import NewEntityCard from '@/components/NewEntityCard.vue';
 
@@ -31,8 +38,11 @@ interface EntityCard {
   components: {
     NewEntityCard,
   },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
 })
-export default class New extends Vue {
+export default class NewEntity extends Vue {
   private worldBackgroundUrl: string = require('@/assets/stephane-wootha-richard-l-autre-bout-du-monde.jpg');
   private entities: EntityCard[] = [
     { toLink: 'new-world', entityType: 'world' },
@@ -44,8 +54,10 @@ export default class New extends Vue {
     console.log(this.$route.name);
   }
 
-  private close() {
-    this.$emit('close');
+  private onClose(event: any) {
+    if (window.history.length > 1) {
+      this.$router.go(-1);
+    }
   }
 }
 </script>

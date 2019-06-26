@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Configuration from './views/Configuration.vue';
+
 import Home from '@/views/Home.vue';
 import Worlds from '@/views/Worlds.vue';
 // import Locations from './views/Locations.vue';
 // import Characters from './views/Characters.vue';
 // import Artifacts from './views/Artifacts.vue';
-import New from '@/views/New.vue';
+import NewEntity from '@/views/NewEntity.vue';
 import WorldNew from '@/components/WorldNew.vue';
 import WorldProfile from '@/components/WorldProfile.vue';
 // import Search from './views/Search.vue';
@@ -57,12 +57,12 @@ export default new Router({
     //   component: Artifacts,
     // },
     {
-      path: '/new',
-      name: 'new',
-      component: New,
+      path: '/new-entity',
+      name: 'new-entity',
+      component: NewEntity,
     },
     {
-      path: '/new/world',
+      path: '/new-entity/world',
       name: 'new-world',
       component: WorldNew,
     },

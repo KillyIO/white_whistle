@@ -1,6 +1,6 @@
 <template>
-  <div class="flex min-h-screen">
-    <div class="w-24 fixed min-h-screen flex justify-center items-center">
+  <div class="flex h-screen">
+    <div class="w-24 fixed h-screen flex items-center justify-center">
       <ul>
         <router-link tag="li" to="/home" class="mb-10 text-gray-900">
           <a>
@@ -27,7 +27,7 @@
             <font-awesome-icon icon="scroll" />
           </a>
         </router-link>
-        <router-link tag="li" to="/new" class="mb-10 text-gray-900">
+        <router-link tag="li" to="/new-entity" class="mb-10 text-gray-900">
           <a>
             <font-awesome-icon icon="plus" />
           </a>
@@ -42,7 +42,7 @@
 
     <div class="w-full ml-24">
       <div class="container mx-auto">
-        <router-view/>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -52,7 +52,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-@Component({})
+@Component({
+})
 export default class AppSidebar extends Vue {
 }
 </script>

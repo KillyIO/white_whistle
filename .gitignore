@@ -22,3 +22,5 @@ yarn-error.log*
 
 #Electron-builder output
 /dist_electron
+/src/assets/jan-urschel-gis-ju-deepdive01-d1.jpg
+/src/assets/stephane-wootha-richard-l-autre-bout-du-monde.jpg

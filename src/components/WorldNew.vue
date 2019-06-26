@@ -1,31 +1,23 @@
 <template>
-<!-- fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker -->
-  <div class="">
-    <!-- w-full max-w-xl bg-white shadow-lg rounded-lg p-8 -->
-    <div class="">
+  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
+    <div v-click-outside.capture="onClose" class="w-1/2 bg-white shadow-lg rounded-lg px-8 pt-8 pb-4">
 
-      <div class="flex">
-        <section >
-          <label for="">Name</label>
-          <div class="shadow flex">
-          <input  v-model="Name" class="w-full rounded p-2" type="text" placeholder="e.g. Earth X">
-          </div>
-        </section>
-        <section>
-          <div class="shadow flex">
-            <input @change="onImageChange($event.target.files[0])" type="file" name="" class="w-full rounded p-2">
-          </div>
-          <div>
-            <img v-if="ImageUrl" :src="ImageUrl" alt="world profile pic" class="w-40 h-40">
-          </div>
-        </section>
-      </div>
+      <section class="w-full items-center justify-center">
+        <div class="">
+          <h1 class="font-semibold">WORLD'S NAME</h1>
+          <input v-model="Name" class="w-full rounded border-b-4 p-2 mt-2 mb-4 focus:outline-none" type="text" placeholder="e.g. Earth X">
+        </div>
+        <label class="flex flex-col items-center px-2 py-4 rounded-lg shadow-lg cursor-pointer">
+          <img v-if="ImageUrl" :src="ImageUrl" alt="world banner" class="w-full h-full">
+          <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="world banner" class="w-full h-full">
+          <input @change="onImageChange($event.target.files[0])" type="file" name="Banner" class="hidden">
+        </label>
+      </section>
 
-
-      <div class="bg-red-100">
-        <button @click="goBack" class="float-left">
+      <section class="pt-4 px-2">
+        <button @click="onGoBack" class="float-left border-b-4 hover:border-gray-500 py-2 px-4 font-normal">
           <ul class="flex">
-            <li>
+            <li class="mr-2">
               <font-awesome-icon icon="arrow-left" />
             </li>
             <li>
@@ -33,10 +25,12 @@
             </li>
           </ul>
         </button>
-        <button @click.prevent="onCreate" class="float-right">
+        <button
+          @click.prevent="onCreate"
+          class="float-right shadow-md rounded py-2 px-4 bg-blue-500 hover:bg-blue-800 text-white font-semibold">
           Create
         </button>
-      </div>
+      </section>
     </div>
   </div>
 </template>
@@ -54,13 +48,19 @@ import {
   readJson,
   outputJsonSync,
 } from 'fs-extra';
+import * as vClickOutside from 'v-click-outside-x';
 
 import Utils from '@/utils';
 import { World } from '@/api';
 import { read, close } from 'fs';
 
-@Component({})
+@Component({
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+})
 export default class WorldNew extends Vue {
+  private defaultBannerPath: string = '@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg';
   private utils: Utils = new Utils();
   private Id: number;
   private Name: string = '';
@@ -124,9 +124,15 @@ export default class WorldNew extends Vue {
     });
   }
 
-  private goBack() {
+  private onGoBack() {
     if (window.history.length > 1) {
       this.$router.go(-1);
+    }
+  }
+
+  private onClose() {
+    if (window.history.length > 2) {
+      this.$router.go(-2);
     }
   }
 }
