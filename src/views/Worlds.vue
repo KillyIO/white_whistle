@@ -1,25 +1,15 @@
 <template>
   <div class="px-4 py-8">
-    <h1 class="text-6xl font-extrabold border-b-2 border-gray-500 mb-8">Worlds</h1>
+    <h1 class="text-6xl font-extrabold text-app-primary border-b-2 border-gray-500 mb-8">Worlds</h1>
     <ul class="flex">
-      <li
+      <entity-card
         v-for="world in worldsComputed"
         :key="world.getId()"
-        class="w-1/4 m-4">
-        <div class="w-full h-full block relative">
-          <div
-            class="w-full h-full flex flex-col items-center bg-white shadow-lg rounded-lg align-middle cursor-pointer opacity-75 hover:opacity-100">
-            <img
-              :src="world.getImageUrl()"
-              alt="world banner"
-              class="flex w-full h-full bg-no-repeat bg-cover m-0 p-0 relative items-center justify-around rounded-lg" />
-            <h1
-              class="m-0 text-2xl font-bold text-white p-4 absolute bottom-0">
-              {{ world.getName() }}
-            </h1>
-          </div>
-        </div>
-      </li>
+        v-bind:Id="world.getId()"
+        v-bind:ImageUrl="world.getImageUrl()"
+        v-bind:Name="world.getName()"
+        class="w-1/4 m-4"
+      ></entity-card>
     </ul>
   </div>
 </template>
@@ -31,7 +21,13 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { World } from '@/api';
 
-@Component({})
+import EntityCard from '@/components/EntityCard.vue';
+
+@Component({
+  components: {
+    EntityCard,
+  },
+})
 export default class Worlds extends Vue {
   private worlds: World[];
 

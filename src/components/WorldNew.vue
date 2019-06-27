@@ -27,7 +27,7 @@
         </button>
         <button
           @click.prevent="onCreate"
-          class="float-right shadow-md rounded py-2 px-4 bg-blue-500 hover:bg-blue-800 text-white font-semibold">
+          class="float-right shadow-md rounded py-2 px-4 bg-app-tertiary hover:bg-blue-800 text-white font-semibold">
           Create
         </button>
       </section>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen">
-    <div class="w-24 fixed h-screen flex items-center justify-center">
+    <div class="w-24 fixed h-screen flex items-center justify-center bg-app-primary">
       <ul>
         <router-link tag="li" to="/home" class="mb-10 text-gray-900">
           <a>
@@ -40,7 +40,7 @@
       </ul>
     </div>
 
-    <div class="w-full ml-24">
+    <div class="w-full ml-24 bg-app-secondary">
       <div class="container mx-auto">
         <router-view></router-view>
       </div>

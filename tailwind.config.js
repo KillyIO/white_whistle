@@ -13,8 +13,22 @@ module.exports = {
           light: 'rgba(0, 0, 0, 0.4)',
           lighter: 'rgba(0, 0, 0, 0.25)',
           lightest: 'rgba(0, 0, 0, 0.1)',
+        },
+        app: {
+          primary: '#232931',
+          secondary: '#393e46',
+          tertiary: '#4ecca3',
+          quaternary: '#eeeeee',
         }
-      }
+      },
+      textColor: {
+        app: {
+          primary: '#fcf5ee',
+          secondary: '#fbe8e7',
+          tertiary: '#f7ddde',
+          quaternary: '#ffc4d0',
+        },
+      },
     }
   },
   variants: {
