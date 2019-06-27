@@ -1,14 +1,14 @@
 <template>
-  <div class="px-4 py-8">
-    <h1 class="text-6xl font-extrabold text-app-primary border-b-2 border-gray-500 mb-8">Worlds</h1>
-    <ul class="flex">
+  <div class="px-2 py-8">
+    <h1 class="text-6xl font-extrabold text-app-primary border-b-2 border-gray-500 mx-2 mb-8">Worlds</h1>
+    <ul class="flex flex-wrap w-full">
       <entity-card
         v-for="world in worldsComputed"
         :key="world.getId()"
         v-bind:Id="world.getId()"
         v-bind:ImageUrl="world.getImageUrl()"
         v-bind:Name="world.getName()"
-        class="w-1/4 m-4"
+        class="w-1/4 p-2"
       ></entity-card>
     </ul>
   </div>

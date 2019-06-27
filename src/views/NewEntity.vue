@@ -1,23 +1,20 @@
 <template>
-<!-- fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker -->
-  <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
-    <!-- w-full max-w-3xl bg-white shadow-lg rounded-lg p-8 text-center -->
-    <div v-click-outside.capture="onClose" class="w-auto bg-white shadow-lg rounded-lg py-8 px-4 text-center">
-      <!-- <button ref="button" @click="onClose" class="text-gray-800">
-        <font-awesome-icon icon="times"></font-awesome-icon>
-      </button> -->
-      <h1 class="text-lg font-bold pb-8">HEY, SOMETHING NEW IN MIND, HUH?</h1>
-      <ul class="flex justify-around">
-        <new-entity-card
-          v-for="entity in entities"
-          :key="entity.id"
-          :toLink="entity.toLink"
-          :entityType="entity.entityType">
-        </new-entity-card>
-      </ul>
+  <!-- <transition enter-active-class="animated zoomIn" leave-active-class="animated zoomOut faster"> -->
+    <div class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-darker">
+      <div v-click-outside.capture="onClose" class="w-auto bg-white shadow-lg rounded-lg py-8 px-4 text-center">
+        <h1 class="text-lg font-bold pb-8">HEY, SOMETHING NEW IN MIND, HUH?</h1>
+        <ul class="flex justify-around">
+          <new-entity-card
+            v-for="entity in entities"
+            :key="entity.id"
+            :toLink="entity.toLink"
+            :entityType="entity.entityType">
+          </new-entity-card>
+        </ul>
+      </div>
+      <router-view/>
     </div>
-    <router-view/>
-  </div>
+  <!-- </transition> -->
 </template>
 
 <script lang="ts">
@@ -28,6 +25,7 @@ import Component from 'vue-class-component';
 import * as vClickOutside from 'v-click-outside-x';
 
 import NewEntityCard from '@/components/NewEntityCard.vue';
+import { Watch } from 'vue-property-decorator';
 
 interface EntityCard {
   toLink: string;

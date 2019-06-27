@@ -9,7 +9,7 @@
         </div>
         <label class="flex flex-col items-center px-2 py-4 rounded-lg shadow-lg cursor-pointer">
           <img v-if="ImageUrl" :src="ImageUrl" alt="world banner" class="w-full h-full">
-          <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="world banner" class="w-full h-full">
+          <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="world banner" class="w-full h-full rounded-lg">
           <input @change="onImageChange($event.target.files[0])" type="file" name="Banner" class="hidden">
         </label>
       </section>

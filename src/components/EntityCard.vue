@@ -2,8 +2,9 @@
   <router-link
     tag="li"
     :to="{ name: 'world-profile', params: { Id } }"
+    class=""
   >
-    <div class="w-full h-full block relative">
+    <div class="w-full h-full relative">
       <div
         class="w-full h-full flex flex-col items-center bg-app=primary shadow-lg rounded-lg align-middle cursor-pointer opacity-75 hover:opacity-100">
         <img

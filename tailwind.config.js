@@ -5,6 +5,12 @@ module.exports = {
     },
     extend: {
       colors: {
+        app: {
+          primary: '#232931',
+          secondary: '#393e46',
+          tertiary: '#4ecca3',
+          quaternary: '#eeeeee',
+        },
         smoke: {
           darkest: 'rgba(0, 0, 0, 0.9)',
           darker: 'rgba(0, 0, 0, 0.75)',
@@ -14,12 +20,6 @@ module.exports = {
           lighter: 'rgba(0, 0, 0, 0.25)',
           lightest: 'rgba(0, 0, 0, 0.1)',
         },
-        app: {
-          primary: '#232931',
-          secondary: '#393e46',
-          tertiary: '#4ecca3',
-          quaternary: '#eeeeee',
-        }
       },
       textColor: {
         app: {
@@ -33,6 +33,7 @@ module.exports = {
   },
   variants: {
     opacity: ['responsive', 'hover'],
+    borderRadius: ['responsive', 'hover'],
   },
   plugins: [],
 }
