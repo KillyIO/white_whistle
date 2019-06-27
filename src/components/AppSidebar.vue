@@ -1,50 +1,50 @@
 <template>
-  <div class="flex h-screen">
+  <div class="flex w-screen h-screen">
     <div class="w-24 fixed h-screen flex items-center justify-center bg-app-primary">
       <ul class="text-center">
         <router-link
           tag="li"
           to="/home"
-          class="p-4 mb-2 shadow rounded-full hover:rounded-lg text-app-primary bg-app-secondary hover:bg-app-tertiary cursor-pointer"
+          class="mb-2"
         >
-          <a class="">
-            <small class="">HOME</small>
-            <!-- <font-awesome-icon icon="home" /> -->
+          <a
+            class="p-2 transition-bg transition-100 shadow rounded-full hover:rounded-lg text-app-primary bg-app-secondary hover:bg-app-tertiary cursor-pointer">
+            <font-awesome-icon icon="home" />
           </a>
         </router-link>
         <router-link tag="li" to="/worlds" class="p-4 mb-2 text-app-primary">
           <a>
-            <small>WORLDS</small>
+            <small>W</small>
             <!-- <font-awesome-icon icon="globe" /> -->
           </a>
         </router-link>
         <router-link tag="li" to="/locations" class="p-4 mb-2 text-app-primary">
           <a>
-            <small>REGIONS</small>
+            <small>R</small>
             <!-- <font-awesome-icon icon="map-marked-alt" /> -->
           </a>
         </router-link>
         <router-link tag="li" to="/characters" class="p-4 mb-2 text-app-primary">
           <a>
-            <small>CHARACTERS</small>
+            <small>C</small>
             <!-- <font-awesome-icon icon="users" /> -->
           </a>
         </router-link>
         <router-link tag="li" to="/artifacts" class="p-4 mb-2 text-app-primary">
           <a>
-            <small>ARTIFACTS</small>
+            <small>A</small>
             <!-- <font-awesome-icon icon="scroll" /> -->
           </a>
         </router-link>
         <router-link tag="li" to="/new-entity" class="p-4 mb-2 text-app-primary">
           <a>
-            <small>NEW</small>
+            <small>N</small>
             <!-- <font-awesome-icon icon="plus" /> -->
           </a>
         </router-link>
         <router-link tag="li" to="/search" class="p-4 text-app-primary">
           <a>
-            <small>SEARCH</small>
+            <small>S</small>
             <!-- <font-awesome-icon icon="search" /> -->
           </a>
         </router-link>

@@ -29,11 +29,32 @@ module.exports = {
           quaternary: '#ffc4d0',
         },
       },
-    }
+    },
+    transitionProperty: { // defaults to these values
+      'none': 'none',
+      'all': 'all',
+      'color': 'color',
+      'bg': 'background-color',
+      'border': 'border-color',
+      'colors': ['color', 'background-color', 'border-color'],
+      'opacity': 'opacity',
+      'transform': 'transform',
+    },
+    transitionDuration: { // defaults to these values
+      'default': '250ms',
+      '0': '0ms',
+      '100': '100ms',
+      '250': '250ms',
+      '500': '500ms',
+      '750': '750ms',
+      '1000': '1000ms',
+    },
   },
   variants: {
     opacity: ['responsive', 'hover'],
     borderRadius: ['responsive', 'hover'],
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-transitions')(),
+  ],
 }
