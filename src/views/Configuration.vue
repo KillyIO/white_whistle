@@ -30,11 +30,12 @@ import {
   ensureDirSync,
   readdirSync,
 } from 'fs-extra';
+import rsvp, { Promise } from 'rsvp';
 
 import { World } from '@/api';
 import Utils from '@/utils';
 
-type fn = () => void;
+type fn = () => any;
 
 @Component({})
 export default class Configuration extends Vue {
@@ -43,39 +44,42 @@ export default class Configuration extends Vue {
   private utils: Utils = new Utils();
   private worlds: World[] = [];
 
-  private created() {
-    const mainScreen: Electron.Display = remote.screen.getPrimaryDisplay();
-    console.log(mainScreen);
-    // console.log(`${dimensions.width}, ${dimensions.height}`);
-    this.configMethods.push(() => {
-      this.configMessage = 'Launching application';
-    });
+  private dir = this.utils.getWhiteWhistlePath();
+  private configPath = this.utils.getConfigFilePath();
+  private worldsDir = this.utils.getWorldsSubfolderPath();
+  private regionsDir = this.utils.getRegionsSubfolderPath();
+  private charactersDir = this.utils.getCharactersSubfolderPath();
+  private artifactsDir = this.utils.getArtifactsSubfolderPath();
 
-    this.configMethods.push(() => {
-      this.checkLatestUpdates();
-    });
+  private options = {
+    mode: 0o2775,
+  };
 
-    this.configMethods.push(() => {
-      this.checkConfigFile();
-    });
-
-    this.configMethods.push(() => {
-      this.checkWhiteWhistleFolder();
-    });
-
-    this.configMethods.push(() => {
-      this.checkSubfolder();
-    });
-
-    this.configMethods.push(() => {
-      this.closeConfiguration();
-    });
+  constructor() {
+    super();
   }
 
   private mounted() {
-    for (const met of this.configMethods) {
-      met();
-    }
+    this.checkLatestUpdates();
+    this.ensureWhiteWhistleFolder(this.dir);
+
+    const ensureConfig: boolean = this.ensureConfigFile(this.configPath);
+    const configData: object = this.readConfigFile(this.configPath, ensureConfig);
+    this.loadConfigData(configData);
+
+    this.ensureWorldsSubfolder(this.worldsDir);
+    const worldsFiles: string[] = this.readWorldsSubFolder(this.worldsDir);
+    const worldsData: object[] = this.readWorldsSubFolderFiles(this.worldsDir, worldsFiles);
+    this.loadWorldsData(worldsData);
+
+    this.ensureRegionsSubfolder(this.regionsDir);
+    const regionsFiles: string[] = this.readRegionsSubFolder(this.regionsDir);
+
+    this.ensureCharactersSubfolder(this.charactersDir);
+
+    this.ensureArtifactsSubfolder(this.artifactsDir);
+
+    this.closeConfig();
   }
 
   private get messageComputed(): string {
@@ -85,102 +89,109 @@ export default class Configuration extends Vue {
   private checkLatestUpdates(): void {
     // implement this later
     this.configMessage = 'Checking for updates';
+    console.log(this.configMessage);
+    this.configMessage = '';
   }
 
-  private checkConfigFile(): void {
-    this.configMessage = 'Checking configuration file';
+  private ensureWhiteWhistleFolder(dir: string): void {
+    this.configMessage = 'Ensuring app folder exists';
 
-    const configPath = this.utils.getConfigFilePath();
-
-    const configExists = pathExistsSync(configPath);
-
-    if (configExists) {
-      const data = readJsonSync(configPath);
-      this.$store
-      .dispatch('setWorldId', data.worldId)
-      .then(() => {
-        this.configMessage = 'App\'s configuration checking successful';
-      }).catch((err) => {
-        throw err;
-      });
-    } else {
-      outputJsonSync(configPath, {
-        worldId: 1,
-      });
-      const data = readJsonSync(configPath);
-      console.log(data);
-    }
+    ensureDirSync(dir, this.options);
+    this.configMessage = 'App folder\'s found or created';
   }
 
-  private checkWhiteWhistleFolder(): void {
-    this.configMessage = 'Checking for app folder';
+  // NOTE Configuration file functions
 
-    const dir = this.utils.getWhiteWhistlePath();
-
-    ensureDirSync(dir);
-    this.configMessage = 'App folder\'s checking successful';
+  private ensureConfigFile(configPath: string): boolean {
+    this.configMessage = 'Ensuring configuration file exists';
+    return pathExistsSync(configPath);
   }
 
-  private checkWorldsSubfolder(): void {
-    const worldsDir = this.utils.getWorldsSubfolderPath();
+  private readConfigFile(configPath: string, fileExists: boolean): object {
+    const data: object = new Object();
 
-    ensureDirSync(worldsDir);
-    this.configMessage = 'worlds subfolder\'s checking successful';
-
-    this.configMessage = 'Retrieving worlds\' data';
-
-    const dirList = readdirSync(worldsDir);
-    dirList.forEach((el) => {
-      const filePath: string = join(worldsDir, el);
-
-      const data: object = readJsonSync(filePath);
-      const world: World = new World(data);
-
-      this.$store
-      .dispatch('addWorld', world)
-      .then(() => {
-        this.configMessage = `${this.utils.convertName(el)} retrieved`;
-      })
-      .catch((err) => {
-        throw err;
-      });
-    });
+    if (!fileExists) { outputJsonSync(configPath, { worldId: 1 }); }
+    return readJsonSync(configPath);
   }
 
-  private checkLocationsSubfolder(): void {
-    const locationsDir = this.utils.getLocationsSubfolderPath();
+  private loadConfigData(configData: any): void {
+    this.configMessage = 'Loading configuration\' data';
 
-    ensureDirSync(locationsDir);
-    this.configMessage = 'locations subfolder\'s checking successful';
+    this.$store.dispatch('setWorldId', configData.worldId);
   }
 
-  private checkCharactersSubfolder(): void {
-    const charactersDir = this.utils.getCharactersSubfolderPath();
+  // NOTE Worlds folders functions
+
+  private ensureWorldsSubfolder(worldsDir: string): void {
+    this.configMessage = 'Ensuring worlds subfolder exists';
+    console.log(this.configMessage);
+
+    ensureDirSync(worldsDir, this.options);
+    this.configMessage = 'worlds subfolder\'s found or created';
+  }
+
+  private readWorldsSubFolder(worldsDir: string): string[] {
+    this.configMessage = 'Reading worlds subfolder';
+    console.log(this.configMessage);
+
+    return readdirSync(worldsDir);
+  }
+
+  private readWorldsSubFolderFiles(worldsDir: string, worldsFiles: string[]): object[] {
+    this.configMessage = 'Reading worlds subfolder\'s files';
+    console.log(this.configMessage);
+
+    return worldsFiles.map((el) => readJsonSync(join(worldsDir, el)));
+  }
+
+  private loadWorldsData(worldsData: object[]): void {
+    this.configMessage = 'Loading worlds\' data';
+    console.log(this.configMessage);
+
+    worldsData.map((el) => this.$store.dispatch('addWorld', new World(el)));
+  }
+
+  // NOTE Regions folder functions
+
+  private ensureRegionsSubfolder(regionsDir: string): void {
+    this.configMessage = 'Ensuring regions subfolder exists';
+    console.log(this.configMessage);
+
+    ensureDirSync(regionsDir, this.options);
+    this.configMessage = 'regions subfolder\'s found or created';
+  }
+
+  private readRegionsSubFolder(regionsDir: string): string[] {
+    this.configMessage = 'Reading regions subfolder';
+    console.log(this.configMessage);
+
+    return readdirSync(regionsDir);
+  }
+
+  // NOTE Characters folder functions
+
+  private ensureCharactersSubfolder(charactersDir: string): void {
+    this.configMessage = 'Ensuring characters subfolder exists';
+    console.log(this.configMessage);
 
     ensureDirSync(charactersDir);
-    this.configMessage = 'characters subfolder\'s checking successful';
+    this.configMessage = 'characters subfolder\'s found or created';
   }
 
-  private checkArtifactsSubfolder(): void {
-    const artifactsDir = this.utils.getArtifactsSubfolderPath();
+  // NOTE Artifacts folder functions
+
+  private ensureArtifactsSubfolder(artifactsDir: string): void {
+    this.configMessage = 'Ensuring artifacts subfolder exists';
+    console.log(this.configMessage);
 
     ensureDirSync(artifactsDir);
-    this.configMessage = 'artifacts subfolder\'s checking successful';
+    this.configMessage = 'artifacts subfolder\'s found or created';
   }
 
-  private checkSubfolder(): void {
-    this.configMessage = 'Checking for app subfolders';
+  // NOTE Close configuration functions
 
-    this.checkWorldsSubfolder();
-    this.checkLocationsSubfolder();
-    this.checkCharactersSubfolder();
-    this.checkArtifactsSubfolder();
-  }
-
-  private closeConfiguration() {
-    this.$router.replace({
-      name: 'home',
-    });
+  private closeConfig(): void {
+    this.$router.replace({ name: 'home' });
   }
 }
 </script>

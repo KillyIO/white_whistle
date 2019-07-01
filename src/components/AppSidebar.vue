@@ -51,7 +51,7 @@
       </ul>
     </div>
 
-    <div class="w-full h-screen ml-24 bg-app-secondary">
+    <div class="w-full h-full ml-24 bg-app-secondary">
       <div class="container mx-auto">
         <router-view></router-view>
       </div>

@@ -34,6 +34,7 @@ export default class Worlds extends Vue {
   constructor() {
     super();
     this.worlds = this.$store.getters.getWorlds;
+    console.log(this.worlds);
   }
 
   private created() {
