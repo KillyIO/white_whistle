@@ -2,12 +2,7 @@
 import { homedir } from 'os';
 import { join } from 'path';
 import {
-  ensureFile,
-  ensureFileSync,
-  outputJson,
   outputJsonSync,
-  readdir,
-  readJson,
 } from 'fs-extra';
 
 import { World } from '@/api';
@@ -79,24 +74,6 @@ export default class Utils {
    */
   public saveWorld(filePath: string, world: World): void {
     console.log('save world');
-    outputJson(filePath, world)
-    .then(() => {
-      console.log('world saved');
-    })
-    .catch((err) => {
-      throw err;
-    });
-  }
-
-  public readdirAsync(path: string): Promise<string[]> {
-    return new Promise((resolve, reject) => {
-      readdir(path, (err, list) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(list);
-      });
-    });
+    outputJsonSync(filePath, world);
   }
 }

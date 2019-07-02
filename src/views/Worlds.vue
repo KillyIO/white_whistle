@@ -1,6 +1,10 @@
 <template>
-  <div class="px-2 py-8">
-    <h1 class="text-6xl font-extrabold text-app-primary border-b-2 border-gray-500 mx-2 mb-8">Worlds</h1>
+  <div class="container mx-auto px-2 py-8" :class="modifyHeightClass">
+    <h1
+      class="text-6xl font-extrabold font-serif text-app-primary border-b-2 border-gray-500 mx-2 mb-8"
+    >
+      Worlds
+    </h1>
     <ul class="flex flex-wrap w-full">
       <entity-card
         v-for="world in worldsComputed"
@@ -30,10 +34,12 @@ import EntityCard from '@/components/EntityCard.vue';
 })
 export default class Worlds extends Vue {
   private worlds: World[];
+  private screenHeight: string;
 
   constructor() {
     super();
     this.worlds = this.$store.getters.getWorlds;
+    this.screenHeight = 'h-screen';
     console.log(this.worlds);
   }
 
@@ -43,6 +49,10 @@ export default class Worlds extends Vue {
 
   private get worldsComputed(): World[] {
     return this.worlds;
+  }
+
+  private get modifyHeightClass(): string {
+    return this.worlds.length > 12 ? 'h-full' : 'h-screen';
   }
 
   private onClickEdit(worldId: number) {

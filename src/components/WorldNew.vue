@@ -5,9 +5,14 @@
       <section class="w-full items-center justify-center">
         <div class="">
           <h1 class="font-semibold">WORLD'S NAME</h1>
-          <input v-model="Name" class="w-full rounded border-b-4 p-2 mt-2 mb-4 focus:outline-none" type="text" placeholder="e.g. Earth X">
+          <input v-model="Name" class="w-full border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-gray-600" type="text" placeholder="e.g. Earth X">
         </div>
-        <label class="flex flex-col items-center px-2 py-4 rounded-lg shadow-lg cursor-pointer">
+        <label
+          @mouseover="BannerIsHover = true"
+          @mouseleave="BannerIsHover = false"
+          class="flex flex-col items-center justify-center px-2 py-4 rounded-lg shadow-lg cursor-pointer opacity-100 hover:opacity-75"
+        >
+          <font-awesome-icon v-if="BannerIsHover" icon="camera" size="4x" class="absolute text-white opacity-50" />
           <img v-if="ImageUrl" :src="ImageUrl" alt="world banner" class="w-full h-full">
           <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="world banner" class="w-full h-full rounded-lg">
           <input @change="onImageChange($event.target.files[0])" type="file" name="Banner" class="hidden">
@@ -66,6 +71,8 @@ export default class WorldNew extends Vue {
   private Name: string = '';
   private ImageUrl: string = '';
   private Created: number = 0;
+
+  private BannerIsHover: boolean = false;
 
   constructor() {
     super();

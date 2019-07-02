@@ -1,31 +1,64 @@
 <template>
-  <div>
-    <h1>NAME: {{ nameComputed }}</h1>
-    <button @click="onEditName">Edit</button>
-    <div v-if="isNameEditable">
-      <input v-model="Name" type="text" name="Name">
-      <button @click="onNameSave">Save</button>
-    </div>
-    <img @click="onEditImageUrl" :src="ImageUrl" alt="World profile picture">
-    <div v-if="isImageUrlEditable">
-      <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image">
-      <button @click="onImageUrlSave">Save</button>
-    </div>
-    <small>CREATED: {{ createdComputed }}</small>
+  <div class="w-full h-full pb-20 text-white bg-smoke-darker">
+    <section class="w-full h-full relative">
+      <label
+        @click="onEditImageUrl"
+        @mouseover="BannerIsHover = true"
+        @mouseleave="BannerIsHover = false"
+        class="w-full h-screen flex flex-col items-center justify-center bg-app-primary shadow-lg rounded-lg cursor-pointer opacity-100 hover:opacity-75"
+      >
+        <img
+          :src="ImageUrl"
+          alt="World profile picture"
+          class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
+        <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
+        <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
+      </label>
+    </section>
 
-    <h1>GENESIS</h1>
-    <h2>AGE: {{ ageComputed }}</h2>
-    <button @click="onEditAge">Edit</button>
-    <div v-if="isAgeEditable">
-      <input v-model="Age" name="Age" type="number" step="1"/>
-      <button @click="onAgeSave">Save</button>
+    <!-- Name -->
+    <div class="z-10 w-full py-20 text-app-secondary absolute bottom-0 bg-smoke-darker">
+      <div class="flex items-center justify-center">
+        <h1
+          v-if="!isNameEditable"
+          @click="onEditName"
+          class="text-8xl font-bold tracking-widest font-serif cursor-pointer"
+        >
+          {{ nameComputed }}
+        </h1>
+        <div v-else>
+          <input v-model="Name" type="text" name="Name">
+          <button @click="onNameSave">Save</button>
+        </div>
+      </div>
     </div>
-    <h2>CREATION: {{ creationComputed }}</h2>
-    <button @click="onEditCreation">Edit</button>
-    <div v-if="isCreationEditable">
-      <textarea v-model="Creation" name="Creation" cols="100" rows="10" />
-      <button @click="onCreationSave">Save</button>
-    </div>
+
+    <!-- Genesis -->
+    <section class="w-full mt-40 text-center">
+      <div class="flex mb-32 justify-center">
+        <h1 class="mx-3 font-serif text-4xl">GENESIS</h1>
+        <button @click="onEditCreation" class="focus:outline-none"><font-awesome-icon icon="pen" /></button>
+      </div>
+      <div v-if="!isCreationEditable">
+        <p v-if="creationComputed === 'UNKNOWN'" class="font-serif text-basemx-120">
+          Missing data...
+        </p>
+        <p v-else class="font-serif text-base text-left mx-120">
+          {{ creationComputed }}
+        </p>
+      </div>
+      <div v-else>
+        <textarea
+          v-model="Creation"
+          name="Creation"
+          cols="100"
+          rows="10"
+          class="p-2 bg-smoke-dark focus:outline-none shadow-lg resize-none"
+        >
+        </textarea>
+        <button @click="onCreationSave">Save</button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -61,12 +94,14 @@ export default class WorldProfile extends Vue {
   private isImageUrlEditable: boolean = false;
   private isAgeEditable: boolean = false;
   private isCreationEditable: boolean = false;
+  private BannerIsHover: boolean = false;
 
   private destroyed() {
     const filePath: string = join(
       this.utils.getWorldsSubfolderPath(),
       `${this.Id}.json`,
     );
+    this.onImageUrlSave();
 
     this.utils.saveWorld(filePath, this.world);
   }

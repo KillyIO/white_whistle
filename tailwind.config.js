@@ -1,9 +1,10 @@
 module.exports = {
   theme: {
-    container: {
-      padding: '1rem',
-    },
     extend: {
+      fontSize: {
+        '7xl': '5rem',
+        '8xl': '6rem',
+      },
       colors: {
         app: {
           primary: '#232931',
@@ -28,6 +29,15 @@ module.exports = {
           tertiary: '#f7ddde',
           quaternary: '#ffc4d0',
         },
+      },
+      margin: {
+        '72': '18rem',
+        '80': '20rem',
+        '88': '22rem',
+        '96': '24rem',
+        '104': '26rem',
+        '112': '28rem',
+        '120': '30rem',
       },
     },
     transitionProperty: { // defaults to these values

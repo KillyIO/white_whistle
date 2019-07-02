@@ -7,6 +7,8 @@ import './registerServiceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowLeft,
+  faBars,
+  faCamera,
   faGlobe,
   faHome,
   faMapMarkedAlt,
@@ -27,6 +29,8 @@ webFrame.setVisualZoomLevelLimits(1, 1);
 
 library.add(
   faArrowLeft,
+  faBars,
+  faCamera,
   faGlobe,
   faHome,
   faMapMarkedAlt,

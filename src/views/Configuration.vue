@@ -18,12 +18,6 @@ import store from '@/store';
 import { remote } from 'electron';
 import { join } from 'path';
 import {
-  ensureDir,
-  ensureFile,
-  pathExists,
-  readdir,
-  readJson,
-  outputJson,
   pathExistsSync,
   outputJsonSync,
   readJsonSync,
