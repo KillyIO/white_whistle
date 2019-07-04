@@ -5,3 +5,29 @@
 @tailwind utilities;
 
 @import "~animate.css/animate.css";
+
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #393e46;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.force-overflow::-webkit-scrollbar {
+  width: 10px;
+  background-color: #232931;
+}
+
+.force-overflow::-webkit-scrollbar-thumb {
+  background-color: #393e46;
+}
+
+.force-overflow::-webkit-scrollbar-track {
+  background-color: #232931;
+}

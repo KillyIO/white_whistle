@@ -34,29 +34,41 @@
     </div>
 
     <!-- Genesis -->
-    <section class="w-full mt-40 text-center">
+    <section class="w-full mt-40 text-center text-app-primary">
       <div class="flex mb-32 justify-center">
         <h1 class="mx-3 font-serif text-4xl">GENESIS</h1>
         <button @click="onEditCreation" class="focus:outline-none"><font-awesome-icon icon="pen" /></button>
       </div>
-      <div v-if="!isCreationEditable">
-        <p v-if="creationComputed === 'UNKNOWN'" class="font-serif text-basemx-120">
+      <div v-if="!isCreationEditable" class="flex items-center justify-center flex-col">
+        <p v-if="creationComputed === 'UNKNOWN'" class="font-serif font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
           Missing data...
         </p>
-        <p v-else class="font-serif text-base text-left mx-120">
+        <p v-else class="font-serif font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
           {{ creationComputed }}
         </p>
       </div>
-      <div v-else>
+      <div v-else class="scrollbar">
         <textarea
           v-model="Creation"
           name="Creation"
           cols="100"
           rows="10"
-          class="p-2 bg-smoke-dark focus:outline-none shadow-lg resize-none"
-        >
-        </textarea>
-        <button @click="onCreationSave">Save</button>
+          class="p-2 bg-app-primary focus:outline-none shadow-lg resize-none force-overflow"
+        />
+        <div class="flex justify-center my-4">
+          <button
+            @click="isCreationEditable = false"
+            class="shadow-md rounded mx-8 py-2 px-6 bg-app-tertiary hover:bg-blue-800 font-semibold"
+          >
+            Cancel
+          </button>
+          <button
+            @click="onCreationSave"
+            class="shadow-md rounded mx-8 py-2 px-8 bg-app-tertiary hover:bg-blue-800 font-semibold"
+          >
+            Save
+          </button>
+        </div>
       </div>
     </section>
   </div>
