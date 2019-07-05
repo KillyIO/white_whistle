@@ -5,7 +5,7 @@
       <section class="w-full items-center justify-center">
         <div class="">
           <h1 class="font-semibold">WORLD'S NAME</h1>
-          <input v-model="Name" class="w-full border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-gray-600" type="text" placeholder="e.g. Earth X">
+          <input v-model="Name" class="w-full border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-primary" type="text" placeholder="e.g. Earth X">
         </div>
         <label
           @mouseover="BannerIsHover = true"
@@ -20,7 +20,7 @@
       </section>
 
       <section class="pt-4 px-2">
-        <button @click="onGoBack" class="float-left border-b-4 hover:border-gray-500 py-2 px-4 font-normal">
+        <button @click="onGoBack" class="float-left border-b-4 hover:border-app-primary py-2 px-4 font-normal">
           <ul class="flex">
             <li class="mr-2">
               <font-awesome-icon icon="arrow-left" />
@@ -32,7 +32,7 @@
         </button>
         <button
           @click.prevent="onCreate"
-          class="float-right shadow-md rounded py-2 px-4 bg-app-tertiary hover:bg-blue-800 text-white font-semibold">
+          class="float-right shadow-md rounded py-2 px-4 bg-app-tertiary hover:bg-app-primary text-white font-semibold">
           Create
         </button>
       </section>

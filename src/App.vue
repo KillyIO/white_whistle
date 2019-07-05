@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-app-secondary">
+  <div id="app" class="min-h-screen bg-app-secondary-darker">
     <AppSidebar />
   </div>
 </template>

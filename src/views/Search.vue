@@ -1,14 +1,34 @@
 <template>
-  <div>
-    <section class="h-60 p-10 text-center bg-gray-600">
-      <!-- <h1 class="text-gray-800 text-4xl font-bold">Search for en entity</h1> -->
+  <div class="w-full">
+    <section class="h-60 px-10 pt-32 mb-8 text-center">
+      <h1 class="text-app-quinary text-4xl font-bold">Search for en entity</h1>
       <div class="container mx-auto py-8">
-        <input class="w-9/12 h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg" type="search" placeholder="Try searching for a character">
+        <input
+          v-model="SearchRegExp"
+          class="w-9/12 h-16 text-white bg-app-secondary-darker border-b-4 focus:outline-none border-app-quinary focus:border-app-tertiary text-xl px-8"
+          type="search"
+          placeholder="Try searching for a character"
+        />
       </div>
     </section>
 
-    <section class="h-screen p-10 bg-gray-200">
-      <h1>Latest entities</h1>
+    <section class="px-20">
+      <div class="container mx-auto px-2 py-8">
+        <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Worlds</h1>
+        <ul class="flex flex-wrap w-full">
+          <world-card
+            v-for="world in filteredWorldsComputed"
+            :key="world.Id"
+            v-bind:Id="world.Id"
+            v-bind:Name="world.Name"
+            v-bind:ImageUrl="world.ImageUrl"
+            class="w-1/4 p-2"
+          ></world-card>
+        </ul>
+      </div>
+      <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Regions</h1>
+      <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Characters</h1>
+      <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Artifacts</h1>
     </section>
   </div>
 </template>
@@ -16,11 +36,35 @@
 <script lang="ts">
 /* tslint:disable:no-console */
 
-import Vue from 'vue';
+import { Component, Vue } from 'vue-property-decorator';
 
+import WorldCard from '@/components/WorldCard.vue';
+
+@Component({
+  components: {
+    WorldCard,
+  },
+})
 export default class Search extends Vue {
+  private SearchRegExp: string = '';
+  private filteredWorlds: object[];
+
+  constructor() {
+    super();
+    this.filteredWorlds = this.$store.getters.getWorldCardFields;
+    console.log(this.filteredWorlds);
+  }
+
   private created() {
     console.log(this.$route.name);
+  }
+
+  private get filteredWorldsComputed(): object[] {
+    const ri = new RegExp(this.SearchRegExp.toLowerCase(), 'i');
+
+    return this.filteredWorlds.filter((el: any) => {
+      return ri.test(el.Name.toLowerCase());
+    });
   }
 }
 </script>

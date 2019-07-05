@@ -5,7 +5,7 @@
   >
     <div class="w-full h-full relative">
       <div
-        class="w-full h-full flex flex-col items-center bg-app=primary shadow-lg align-middle cursor-pointer opacity-75 hover:opacity-100">
+        class="w-full h-full flex flex-col items-center bg-app-primary shadow-lg rounded-lg align-middle cursor-pointer opacity-75 hover:opacity-100">
         <img
           v-if="ImageUrl"
           :src="ImageUrl"
@@ -13,7 +13,7 @@
           class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-lg" />
         <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="derfault world banner">
         <h1
-          class="m-0 text-2xl font-bold font-serif text-app-secondary p-4 absolute bottom-0">
+          class="w-full text-center text-2xl font-semibold text-white bg-smoke p-4 absolute bottom-0">
           {{ Name }}
         </h1>
       </div>
@@ -27,7 +27,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 @Component({})
-export default class EntityCard extends Vue {
+export default class WorldCard extends Vue {
   @Prop() private Id!: number;
   @Prop() private ImageUrl!: string;
   @Prop() private Name!: string;

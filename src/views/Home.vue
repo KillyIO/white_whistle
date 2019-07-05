@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <h1>Latest entities created</h1>
+  <div class="text-app-quinary text-center py-20">
+    <h1 class="text-4xl">Latest entities created</h1>
     <ul>
       <!-- <li v-for="item in items" :key="item.id">
         {{ item }}
       </li> -->
     </ul>
 
-    <h1>Recently modified</h1>
+    <h1 class="text-4xl">Recently modified</h1>
     <ul>
       <!-- <li v-for="item in items" :key="item.id">
         {{ item }}
       </li> -->
     </ul>
 
-    <h1>Archived</h1>
+    <h1 class="text-4xl">Archived</h1>
     <ul>
       <!-- <li v-for="item in items" :key="item.id">
         {{ item }}

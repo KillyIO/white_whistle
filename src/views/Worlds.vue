@@ -1,20 +1,22 @@
 <template>
-  <div class="container mx-auto px-2 py-8" :class="modifyHeightClass">
-    <h1
-      class="text-6xl font-extrabold font-serif text-app-primary border-b-2 border-gray-500 mx-2 mb-8"
-    >
-      Worlds
-    </h1>
-    <ul class="flex flex-wrap w-full">
-      <entity-card
-        v-for="world in worldsComputed"
-        :key="world.getId()"
-        v-bind:Id="world.getId()"
-        v-bind:ImageUrl="world.getImageUrl()"
-        v-bind:Name="world.getName()"
-        class="w-1/4 p-2"
-      ></entity-card>
-    </ul>
+  <div class="text-app-quinary">
+    <div class="container mx-auto px-2 py-8">
+      <h1
+        class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"
+      >
+        Worlds
+      </h1>
+      <ul class="flex flex-wrap w-full">
+        <world-card
+          v-for="world in filteredWorldsComputed"
+          :key="world.Id"
+          v-bind:Id="world.Id"
+          v-bind:Name="world.Name"
+          v-bind:ImageUrl="world.ImageUrl"
+          class="w-1/4 p-2"
+        ></world-card>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -25,34 +27,30 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { World } from '@/api';
 
-import EntityCard from '@/components/EntityCard.vue';
+import WorldCard from '@/components/WorldCard.vue';
 
 @Component({
   components: {
-    EntityCard,
+    WorldCard,
   },
 })
 export default class Worlds extends Vue {
-  private worlds: World[];
+  private filteredWorlds: object[];
   private screenHeight: string;
 
   constructor() {
     super();
-    this.worlds = this.$store.getters.getWorlds;
+    this.filteredWorlds = this.$store.getters.getWorldCardFields;
     this.screenHeight = 'h-screen';
-    console.log(this.worlds);
+    console.log(this.filteredWorlds);
   }
 
   private created() {
     console.log(this.$route.name);
   }
 
-  private get worldsComputed(): World[] {
-    return this.worlds;
-  }
-
-  private get modifyHeightClass(): string {
-    return this.worlds.length > 12 ? 'h-full' : 'h-screen';
+  private get filteredWorldsComputed(): object[] {
+    return this.filteredWorlds;
   }
 
   private onClickEdit(worldId: number) {

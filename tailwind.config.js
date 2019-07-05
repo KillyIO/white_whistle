@@ -5,12 +5,25 @@ module.exports = {
         '7xl': '5rem',
         '8xl': '6rem',
       },
+      borderColor: {
+        app: {
+          primary: '#475C7A',
+          secondary: '#685D79',
+          tertiary: '#AB6C82',
+          quaternary: '#D8737F',
+          quinary: '#FCBB6D',
+        },
+      },
       colors: {
         app: {
-          primary: '#232931',
-          secondary: '#393e46',
-          tertiary: '#4ecca3',
-          quaternary: '#eeeeee',
+          primary: '#475C7A',
+          'secondary-lighter': '#484154',
+          'secondary-light': '#302B38',
+          secondary: '#685D79',
+          'secondary-darker': '#1A171E',
+          tertiary: '#AB6C82',
+          quaternary: '#D8737F',
+          quinary: '#FCBB6D',
         },
         smoke: {
           darkest: 'rgba(0, 0, 0, 0.9)',
@@ -22,13 +35,10 @@ module.exports = {
           lightest: 'rgba(0, 0, 0, 0.1)',
         },
       },
-      textColor: {
-        app: {
-          primary: '#fcf5ee',
-          secondary: '#fbe8e7',
-          tertiary: '#f7ddde',
-          quaternary: '#ffc4d0',
-        },
+      height: {
+        72: '18rem',
+        80: '20rem',
+        adaptive: '',
       },
       margin: {
         '72': '18rem',
@@ -38,6 +48,15 @@ module.exports = {
         '104': '26rem',
         '112': '28rem',
         '120': '30rem',
+      },
+      textColor: {
+        app: {
+          primary: '#475C7A',
+          secondary: '#685D79',
+          tertiary: '#AB6C82',
+          quaternary: '#D8737F',
+          quinary: '#FCBB6D',
+        },
       },
     },
     transitionProperty: { // defaults to these values

@@ -4,30 +4,32 @@
 
 @tailwind utilities;
 
+@import "~minireset.css/minireset.css";
+
 @import "~animate.css/animate.css";
 
 body::-webkit-scrollbar {
-  width: 10px;
-  background-color: rgba(0, 0, 0, 0.75);
+  width: 12px;
+  background-color: #1A171E;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #393e46;
+  background-color: #484154;
 }
 
 body::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #1A171E;
 }
 
 .force-overflow::-webkit-scrollbar {
   width: 10px;
-  background-color: #232931;
+  background-color: #302B38;
 }
 
 .force-overflow::-webkit-scrollbar-thumb {
-  background-color: #393e46;
+  background-color: #1A171E;
 }
 
 .force-overflow::-webkit-scrollbar-track {
-  background-color: #232931;
+  background-color: #302B38;
 }

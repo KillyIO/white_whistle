@@ -9,7 +9,7 @@ import Worlds from '@/views/Worlds.vue';
 import NewEntity from '@/views/NewEntity.vue';
 import WorldNew from '@/components/WorldNew.vue';
 import WorldProfile from '@/components/WorldProfile.vue';
-// import Search from './views/Search.vue';
+import Search from './views/Search.vue';
 
 Vue.use(Router);
 
@@ -66,10 +66,10 @@ export default new Router({
       name: 'new-world',
       component: WorldNew,
     },
-    // {
-    //   path: '/search',
-    //   name: 'search',
-    //   component: Search,
-    // },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search,
+    },
   ],
 });

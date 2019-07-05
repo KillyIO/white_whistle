@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full pb-20 text-white bg-smoke-darker">
+  <div class="w-full pb-20">
     <section class="w-full h-full relative">
       <label
         @click="onEditImageUrl"
@@ -17,33 +17,65 @@
     </section>
 
     <!-- Name -->
-    <div class="z-10 w-full py-20 text-app-secondary absolute bottom-0 bg-smoke-darker">
-      <div class="flex items-center justify-center">
-        <h1
-          v-if="!isNameEditable"
-          @click="onEditName"
-          class="text-8xl font-bold tracking-widest font-serif cursor-pointer"
-        >
+    <div class="z-10 w-full py-20 text-white absolute bottom-0 bg-smoke-darker text-center">
+      <div
+        @mouseover="NameIsHover = true"
+        @mouseleave="NameIsHover = false"
+        v-if="!isNameEditable" class="flex justify-center"
+      >
+        <h1 class="text-8xl mx-4 font-semibold tracking-widest">
           {{ nameComputed }}
         </h1>
-        <div v-else>
-          <input v-model="Name" type="text" name="Name">
-          <button @click="onNameSave">Save</button>
+        <button
+          v-show="NameIsHover"
+          :disabled="isNameEditable"
+          @click="onEditName"
+          class="focus:outline-none"
+        >
+          <font-awesome-icon icon="pen" size="3x" />
+        </button>
+      </div>
+      <div v-else class="">
+        <input v-model="Name" type="text" name="Name" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
+        <div>
+          <button
+            @click="isNameEditable = false"
+            class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+          >
+            Cancel
+          </button>
+          <button
+            @click="onNameSave"
+            class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Genesis -->
-    <section class="w-full mt-40 text-center text-app-primary">
-      <div class="flex mb-32 justify-center">
-        <h1 class="mx-3 font-serif text-4xl">GENESIS</h1>
-        <button @click="onEditCreation" class="focus:outline-none"><font-awesome-icon icon="pen" /></button>
+    <section class="w-full mt-40 text-center text-app-quinary">
+      <div
+        @mouseover="GenesisIsHover = true"
+        @mouseleave="GenesisIsHover = false"
+        class="flex mb-32 justify-center"
+      >
+        <h1 class="mx-3 text-4xl">GENESIS</h1>
+        <button
+          v-show="GenesisIsHover"
+          :disabled="isCreationEditable"
+          @click="onEditCreation"
+          class="focus:outline-none"
+        >
+          <font-awesome-icon icon="pen" />
+        </button>
       </div>
       <div v-if="!isCreationEditable" class="flex items-center justify-center flex-col">
-        <p v-if="creationComputed === 'UNKNOWN'" class="font-serif font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
+        <p v-if="creationComputed === 'UNKNOWN'" class="font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
           Missing data...
         </p>
-        <p v-else class="font-serif font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
+        <p v-else class="font-normal leading-relaxed mx-8 mb-8 max-w-lg text-justify">
           {{ creationComputed }}
         </p>
       </div>
@@ -53,18 +85,18 @@
           name="Creation"
           cols="100"
           rows="10"
-          class="p-2 bg-app-primary focus:outline-none shadow-lg resize-none force-overflow"
+          class="p-2 bg-app-secondary-light focus:outline-none shadow-lg resize-none force-overflow"
         />
         <div class="flex justify-center my-4">
           <button
             @click="isCreationEditable = false"
-            class="shadow-md rounded mx-8 py-2 px-6 bg-app-tertiary hover:bg-blue-800 font-semibold"
+            class="shadow-md rounded mx-8 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
           >
             Cancel
           </button>
           <button
             @click="onCreationSave"
-            class="shadow-md rounded mx-8 py-2 px-8 bg-app-tertiary hover:bg-blue-800 font-semibold"
+            class="shadow-md rounded mx-8 py-2 px-8 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
           >
             Save
           </button>
@@ -107,6 +139,8 @@ export default class WorldProfile extends Vue {
   private isAgeEditable: boolean = false;
   private isCreationEditable: boolean = false;
   private BannerIsHover: boolean = false;
+  private NameIsHover: boolean = false;
+  private GenesisIsHover: boolean = false;
 
   private destroyed() {
     const filePath: string = join(
