@@ -1,6 +1,8 @@
 {
   "name": "white-whistle",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "description": "White Whistle is a worldbuilding software for worldbuilder and everyone else.",
+  "author": "François Grèzes <grezesfrancois@gmail.com>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -21,6 +23,7 @@
     "@types/rsvp": "^4.0.2",
     "animate.css": "^3.7.2",
     "core-js": "^2.6.5",
+    "edit-json-file": "^1.2.1",
     "minireset.css": "0.0.5",
     "moment": "^2.24.0",
     "register-service-worker": "^1.6.2",

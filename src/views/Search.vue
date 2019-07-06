@@ -23,10 +23,24 @@
             v-bind:Name="world.Name"
             v-bind:ImageUrl="world.ImageUrl"
             class="w-1/4 p-2"
-          ></world-card>
+          >
+          </world-card>
         </ul>
       </div>
-      <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Regions</h1>
+      <div class="container mx-auto px-2 py-8">
+        <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Regions</h1>
+        <ul class="flex flex-wrap w-full">
+          <region-card
+            v-for="region in filteredRegionsComputed"
+            :key="region.Id"
+            v-bind:Id="region.Id"
+            v-bind:Name="region.Name"
+            v-bind:ImageUrl="region.ImageUrl"
+            class="w-1/4 p-2"
+          >
+          </region-card>
+        </ul>
+      </div>
       <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Characters</h1>
       <h1 class="text-app-quinary mx-2 mb-4 text-4xl border-b-2 border-app-quinary">Artifacts</h1>
     </section>
@@ -39,20 +53,24 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import WorldCard from '@/components/WorldCard.vue';
+import RegionCard from '@/components/RegionCard.vue';
 
 @Component({
   components: {
     WorldCard,
+    RegionCard,
   },
 })
 export default class Search extends Vue {
   private SearchRegExp: string = '';
   private filteredWorlds: object[];
+  private filteredRegions: object[];
 
   constructor() {
     super();
     this.filteredWorlds = this.$store.getters.getWorldCardFields;
-    console.log(this.filteredWorlds);
+    this.filteredRegions = this.$store.getters.getRegionCardFields;
+    // console.log(this.filteredWorlds);
   }
 
   private created() {
@@ -63,6 +81,14 @@ export default class Search extends Vue {
     const ri = new RegExp(this.SearchRegExp.toLowerCase(), 'i');
 
     return this.filteredWorlds.filter((el: any) => {
+      return ri.test(el.Name.toLowerCase());
+    });
+  }
+
+  private get filteredRegionsComputed(): object[] {
+    const ri = new RegExp(this.SearchRegExp.toLowerCase(), 'i');
+
+    return this.filteredRegions.filter((el: any) => {
       return ri.test(el.Name.toLowerCase());
     });
   }

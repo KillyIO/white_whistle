@@ -1,7 +1,7 @@
 <template>
   <router-link
     tag="li"
-    :to="{ name: 'world-profile', params: { Id } }"
+    :to="{ name: 'region-profile', params: { Id } }"
   >
     <div class="w-full h-full relative">
       <div class="w-full h-full flex flex-col items-center bg-app-primary shadow-lg rounded-lg align-middle cursor-pointer opacity-75 hover:opacity-100">
@@ -26,7 +26,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 @Component({})
-export default class WorldCard extends Vue {
+export default class RegionCard extends Vue {
   @Prop() private Id!: number;
   @Prop() private ImageUrl!: string;
   @Prop() private Name!: string;

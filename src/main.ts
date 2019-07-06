@@ -6,6 +6,7 @@ import './registerServiceWorker';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+  faAngleDown,
   faArrowLeft,
   faBars,
   faCamera,
@@ -28,6 +29,7 @@ webFrame.setZoomFactor(1.0);
 webFrame.setVisualZoomLevelLimits(1, 1);
 
 library.add(
+  faAngleDown,
   faArrowLeft,
   faBars,
   faCamera,

@@ -1,11 +1,12 @@
 /* tslint:disable:no-console */
+
 import { homedir } from 'os';
 import { join } from 'path';
 import {
   outputJsonSync,
 } from 'fs-extra';
 
-import { World } from '@/api';
+import { World, Region, Character } from '@/api';
 
 export default class Utils {
 
@@ -75,5 +76,21 @@ export default class Utils {
   public saveWorld(filePath: string, world: World): void {
     console.log('save world');
     outputJsonSync(filePath, world);
+  }
+
+  /**
+   * saveRegion
+   */
+  public saveRegion(filePath: string, region: Region): void {
+    console.log('save region');
+    outputJsonSync(filePath, region);
+  }
+
+  /**
+   * saveCharacter
+   */
+  public saveCharacter(filePath: string, character: Character): void {
+    console.log('save character');
+    outputJsonSync(filePath, character);
   }
 }

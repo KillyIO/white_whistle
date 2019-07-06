@@ -4,8 +4,19 @@
 
       <section class="w-full items-center justify-center">
         <div class="">
-          <h1 class="font-semibold">WORLD'S NAME*</h1>
-          <input v-model="Name" class="w-full border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-primary" type="text" placeholder="e.g. World X...">
+          <h1 class="font-semibold">REGION'S NAME*</h1>
+          <input v-model="Name" type="text" placeholder="e.g. Region X..." class="w-full border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-primary">
+          <div class="inline-block relative w-64">
+            <select v-model="SelectedWorld" class="w-full appearance-none border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-primary">
+              <option :value="null" disabled selected hidden>Please select a world...</option>
+              <option v-for="world in Worlds" :key="world.Id" :value="world">
+                {{ world.Name }}
+              </option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pb-2 text-gray-700">
+              <font-awesome-icon icon="angle-down" />
+            </div>
+          </div>
         </div>
         <label
           @mouseover="BannerIsHover = true"
@@ -37,6 +48,7 @@
           Create
         </button>
       </section>
+
     </div>
   </div>
 </template>
@@ -49,34 +61,35 @@ import Component from 'vue-class-component';
 
 import moment from 'moment';
 import { join } from 'path';
-import {
-  outputJsonSync,
-} from 'fs-extra';
 import * as editJsonFile from 'edit-json-file';
 import * as vClickOutside from 'v-click-outside-x';
 
 import Utils from '@/utils';
-import { World } from '@/api';
+import { Region, AffiliatedWorld } from '@/api';
 
 @Component({
   directives: {
     clickOutside: vClickOutside.directive,
   },
 })
-export default class WorldNew extends Vue {
-  private defaultBannerPath: string = '@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg';
+export default class RegionNew extends Vue {
   private utils: Utils = new Utils();
   private Id: number;
   private Name: string = '';
   private ImageUrl: string = '';
   private Created: number = 0;
 
+  private Worlds: object[];
+  private SelectedWorld: any;
+
   private BannerIsHover: boolean = false;
 
   constructor() {
     super();
 
-    this.Id = this.$store.getters.getWorldId;
+    this.Id = this.$store.getters.getRegionId;
+    this.Worlds = this.$store.getters.getWorldsName;
+    this.SelectedWorld = null;
   }
 
   private created() {
@@ -95,31 +108,33 @@ export default class WorldNew extends Vue {
 
   private onCreate(): void {
     const filePath: string = join(
-      this.utils.getWorldsSubfolderPath(),
+      this.utils.getRegionsSubfolderPath(),
       `${this.Id}.json`,
     );
 
     this.Created = moment().valueOf();
 
-    const newWorld: World = new World({
+    const newRegion: Region = new Region({
       Id: this.Id,
       ImageUrl: this.ImageUrl,
       Created: this.Created,
       Name: this.Name,
     });
 
-    this.utils.saveWorld(filePath, newWorld);
+    newRegion.setAffiliatedWorld(this.SelectedWorld as AffiliatedWorld);
+
+    this.utils.saveRegion(filePath, newRegion);
 
     const file = editJsonFile(this.utils.getConfigFilePath());
 
-    this.$store.dispatch('incrementWorldId');
-    file.set('worldId', this.$store.getters.getWorldId);
+    this.$store.dispatch('incrementRegionId');
+    file.set('regionId', this.$store.getters.getRegionId);
     file.save();
 
-    this.$store.dispatch('addWorld', newWorld)
+    this.$store.dispatch('addRegion', newRegion)
     .then(() => {
       this.$router.replace({
-        name: 'world-profile',
+        name: 'region-profile',
         params: {
           Id: this.Id.toString(),
         },

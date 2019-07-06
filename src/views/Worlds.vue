@@ -3,10 +3,9 @@
     <div class="container mx-auto px-2 py-8">
       <h1
         class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"
-      >
-        Worlds
-      </h1>
-      <ul class="flex flex-wrap w-full">
+      >Worlds</h1>
+      <p v-if="isWorldsListEmptyComputed" class="text-center text-2xl mt-20">Data missing...</p>
+      <ul v-else class="flex flex-wrap w-full">
         <world-card
           v-for="world in filteredWorldsComputed"
           :key="world.Id"
@@ -36,12 +35,12 @@ import WorldCard from '@/components/WorldCard.vue';
 })
 export default class Worlds extends Vue {
   private filteredWorlds: object[];
-  private screenHeight: string;
+  private isWorldsListEmpty: boolean;
 
   constructor() {
     super();
     this.filteredWorlds = this.$store.getters.getWorldCardFields;
-    this.screenHeight = 'h-screen';
+    this.isWorldsListEmpty = false;
     console.log(this.filteredWorlds);
   }
 
@@ -53,17 +52,12 @@ export default class Worlds extends Vue {
     return this.filteredWorlds;
   }
 
-  private onClickEdit(worldId: number) {
-    this.$router.push({
-      name: 'world-profile',
-      params: {
-        Id: worldId.toString(),
-      },
-    });
+  private get isWorldsListEmptyComputed(): boolean {
+    return (this.isWorldsListEmpty =
+      this.filteredWorlds.length === 0 || this.filteredWorlds === undefined);
   }
 }
 </script>
 
 <style scoped>
-
 </style>

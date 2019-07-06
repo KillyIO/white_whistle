@@ -26,7 +26,7 @@ import {
 } from 'fs-extra';
 import rsvp, { Promise } from 'rsvp';
 
-import { World } from '@/api';
+import { World, Region, Character } from '@/api';
 import Utils from '@/utils';
 
 type fn = () => any;
@@ -68,8 +68,13 @@ export default class Configuration extends Vue {
 
     this.ensureRegionsSubfolder(this.regionsDir);
     const regionsFiles: string[] = this.readRegionsSubFolder(this.regionsDir);
+    const regionsData: object[] = this.readRegionsSubFolderFiles(this.regionsDir, regionsFiles);
+    this.loadRegionsData(regionsData);
 
     this.ensureCharactersSubfolder(this.charactersDir);
+    const charactersFiles: string[] = this.readCharactersSubFolder(this.charactersDir);
+    const charactersData: object[] = this.readCharactersSubFolderFiles(this.charactersDir, charactersFiles);
+    this.loadCharactersData(charactersData);
 
     this.ensureArtifactsSubfolder(this.artifactsDir);
 
@@ -104,7 +109,13 @@ export default class Configuration extends Vue {
   private readConfigFile(configPath: string, fileExists: boolean): object {
     const data: object = new Object();
 
-    if (!fileExists) { outputJsonSync(configPath, { worldId: 1 }); }
+    if (!fileExists) {
+      outputJsonSync(configPath, {
+        worldId: 1,
+        regionId: 1,
+        characterId: 1,
+      });
+    }
     return readJsonSync(configPath);
   }
 
@@ -112,6 +123,8 @@ export default class Configuration extends Vue {
     this.configMessage = 'Loading configuration\' data';
 
     this.$store.dispatch('setWorldId', configData.worldId);
+    this.$store.dispatch('setRegionId', configData.regionId);
+    this.$store.dispatch('setCharacterId', configData.characterId);
   }
 
   // NOTE Worlds folders functions
@@ -162,6 +175,20 @@ export default class Configuration extends Vue {
     return readdirSync(regionsDir);
   }
 
+  private readRegionsSubFolderFiles(regionsDir: string, regionsFiles: string[]): object[] {
+    this.configMessage = 'Reading regions subfolder\'s files';
+    console.log(this.configMessage);
+
+    return regionsFiles.map((el) => readJsonSync(join(regionsDir, el)));
+  }
+
+  private loadRegionsData(regionsData: object[]): void {
+    this.configMessage = 'Loading regions\' data';
+    console.log(this.configMessage);
+
+    regionsData.map((el) => this.$store.dispatch('addRegion', new Region(el)));
+  }
+
   // NOTE Characters folder functions
 
   private ensureCharactersSubfolder(charactersDir: string): void {
@@ -170,6 +197,27 @@ export default class Configuration extends Vue {
 
     ensureDirSync(charactersDir);
     this.configMessage = 'characters subfolder\'s found or created';
+  }
+
+  private readCharactersSubFolder(charactersDir: string): string[] {
+    this.configMessage = 'Reading characters subfolder';
+    console.log(this.configMessage);
+
+    return readdirSync(charactersDir);
+  }
+
+  private readCharactersSubFolderFiles(charactersDir: string, charactersFiles: string[]): object[] {
+    this.configMessage = 'Reading characters subfolder\'s files';
+    console.log(this.configMessage);
+
+    return charactersFiles.map((el) => readJsonSync(join(charactersDir, el)));
+  }
+
+  private loadCharactersData(charactersData: object[]): void {
+    this.configMessage = 'Loading characters\' data';
+    console.log(this.configMessage);
+
+    charactersData.map((el) => this.$store.dispatch('addCharacter', new Character(el)));
   }
 
   // NOTE Artifacts folder functions
