@@ -9,7 +9,7 @@
       >
         <img
           :src="ImageUrl"
-          alt="World profile picture"
+          alt="region banner"
           class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
         <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
         <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
