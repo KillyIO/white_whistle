@@ -24,7 +24,6 @@ import {
   ensureDirSync,
   readdirSync,
 } from 'fs-extra';
-import rsvp, { Promise } from 'rsvp';
 
 import { World, Region, Character } from '@/api';
 import Utils from '@/utils';
