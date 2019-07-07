@@ -1,5 +1,5 @@
 <template>
-  <div class="text-app-quinary text-center py-20">
+  <div class="h-screen force-overflow-main text-app-quinary text-center py-20">
     <h1 class="text-4xl">Latest entities created</h1>
     <ul>
       <!-- <li v-for="item in items" :key="item.id">

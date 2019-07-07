@@ -8,28 +8,45 @@
 
 @import "~animate.css/animate.css";
 
-body::-webkit-scrollbar {
+body {
+  overflow: hidden;
+}
+
+#titlebar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+
+.force-overflow-main {
+  overflow-y: auto;
+}
+
+.force-overflow-main::-webkit-scrollbar {
   width: 12px;
   background-color: #1A171E;
 }
 
-body::-webkit-scrollbar-thumb {
+.force-overflow-main::-webkit-scrollbar-thumb {
   background-color: #484154;
 }
 
-body::-webkit-scrollbar-track {
+.force-overflow-main::-webkit-scrollbar-track {
   background-color: #1A171E;
 }
 
-.force-overflow::-webkit-scrollbar {
+.force-overflow-content::-webkit-scrollbar {
   width: 10px;
   background-color: #302B38;
 }
 
-.force-overflow::-webkit-scrollbar-thumb {
+.force-overflow-content::-webkit-scrollbar-thumb {
   background-color: #1A171E;
 }
 
-.force-overflow::-webkit-scrollbar-track {
+.force-overflow-content::-webkit-scrollbar-track {
   background-color: #302B38;
 }

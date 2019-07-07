@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full pb-20">
-    <section class="w-full h-full relative">
+  <div class="w-full h-screen pb-20 force-overflow-main">
+    <section class="w-full h-screen relative">
       <label
         @click="onEditImageUrl"
         @mouseover="BannerIsHover = true"
@@ -9,50 +9,50 @@
       >
         <img
           :src="ImageUrl"
-          alt="World profile picture"
+          alt="world banner"
           class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
         <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
         <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
       </label>
-    </section>
 
-    <!-- Name -->
-    <div class="z-10 w-full py-20 text-white absolute bottom-0 bg-smoke-darker text-center">
-      <div
-        @mouseover="NameIsHover = true"
-        @mouseleave="NameIsHover = false"
-        v-if="!isNameEditable" class="flex justify-center"
-      >
-        <h1 class="text-8xl mx-4 font-semibold tracking-widest">
-          {{ nameComputed }}
-        </h1>
-        <button
-          v-show="NameIsHover"
-          :disabled="isNameEditable"
-          @click="onEditName"
-          class="focus:outline-none"
+      <!-- Name -->
+      <div class="z-10 w-full py-20 text-white absolute bottom-0 bg-smoke-darker text-center">
+        <div
+          @mouseover="NameIsHover = true"
+          @mouseleave="NameIsHover = false"
+          v-if="!isNameEditable" class="flex justify-center"
         >
-          <font-awesome-icon icon="pen" size="3x" />
-        </button>
-      </div>
-      <div v-else class="">
-        <input v-model="Name" type="text" name="Name" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
-        <div>
+          <h1 class="text-8xl mx-4 font-semibold tracking-widest">
+            {{ nameComputed }}
+          </h1>
           <button
-            @click="isNameEditable = false"
-            class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+            v-show="NameIsHover"
+            :disabled="isNameEditable"
+            @click="onEditName"
+            class="focus:outline-none"
           >
-            Cancel
-          </button>
-          <button
-            @click="onNameSave"
-            class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-          >
-            Save
+            <font-awesome-icon icon="pen" size="3x" />
           </button>
         </div>
+        <div v-else class="">
+          <input v-model="Name" type="text" name="Name" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
+          <div>
+            <button
+              @click="isNameEditable = false"
+              class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+            >
+              Cancel
+            </button>
+            <button
+              @click="onNameSave"
+              class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Genesis -->
     <section class="w-full mt-40 text-center text-app-quinary">
@@ -85,7 +85,7 @@
           name="Creation"
           cols="100"
           rows="10"
-          class="p-2 bg-app-secondary-light focus:outline-none shadow-lg resize-none force-overflow"
+          class="p-2 bg-app-secondary-light focus:outline-none shadow-lg resize-none force-overflow-content"
         />
         <div class="flex justify-center my-4">
           <button

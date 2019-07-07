@@ -2,7 +2,7 @@
 
 'use strict';
 
-import { app, protocol, BrowserWindow, screen, webFrame } from 'electron';
+import { app, protocol, BrowserWindow, screen } from 'electron';
 import {
   createProtocol,
   installVueDevtools,
@@ -23,12 +23,14 @@ function createWindow() {
   win = new BrowserWindow({
     width: dimensions.width,
     height: dimensions.height,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  win.maximize();
+  // win.removeMenu();
+  // win.maximize();
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

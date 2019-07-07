@@ -21,6 +21,8 @@ import {
   faSearch,
   faTimes,
   faUsers,
+  faWindowMaximize,
+  faWindowMinimize,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { webFrame } from 'electron';
@@ -44,6 +46,8 @@ library.add(
   faSearch,
   faTimes,
   faUsers,
+  faWindowMaximize,
+  faWindowMinimize,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-app-quinary">
+  <div class="h-screen text-app-quinary force-overflow-main">
     <div class="container mx-auto px-2 py-8">
       <h1
         class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"

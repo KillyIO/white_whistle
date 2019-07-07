@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-screen force-overflow-main">
     <section class="h-60 px-10 pt-32 mb-8 text-center">
-      <h1 class="text-app-quinary text-4xl font-bold">Search for en entity</h1>
+      <h1 class="text-app-quinary text-4xl font-bold">Search for an entity</h1>
       <div class="container mx-auto py-8">
         <input
           v-model="SearchRegExp"
-          class="w-9/12 h-16 text-white bg-app-secondary-darker border-b-4 focus:outline-none border-app-quinary focus:border-app-tertiary text-xl px-8"
+          class="w-9/12 h-16 text-white bg-app-secondary-darker border-b-4 focus:outline-none border-app-quinary focus:border-app-tertiary text-xl px-4"
           type="search"
           placeholder="Try searching for a character"
         />

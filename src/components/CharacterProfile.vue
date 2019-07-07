@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full py-20 px-10">
+  <div class="w-full h-screen py-20 px-10 force-overflow-main">
     <!-- Quotes, Overview, Banner -->
-    <div class="flex w-full h-full">
-      <section class="w-2/3 text-app-quinary">
+    <div class="flex w-full h-screen">
+      <section class="w-1/2 text-app-quinary">
         <h1 class="text-4xl">Quotes</h1>
         <h1 class="text-4xl">Overview</h1>
       </section>
@@ -16,7 +16,7 @@
           <img
             :src="ImageUrl"
             alt="World profile picture"
-            class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
+            class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-t">
           <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
           <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
         </label>
