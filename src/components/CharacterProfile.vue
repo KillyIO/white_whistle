@@ -61,6 +61,7 @@
               </button>
             </div>
           </div>
+          <h2 class="text-2xl mt-2 text-app-quinary">{{ Region.Name }}</h2>
         </div>
       </section>
     </div>

@@ -51,12 +51,12 @@
             </button>
           </div>
         </div>
+        <h2 class="text-3xl text-app-quinary">{{ World.Name }}</h2>
       </div>
     </section>
 
     <!-- Genesis -->
     <section class="w-full mt-10 text-center text-app-quinary">
-      <h1 class="text-4xl mb-4"><span class="font-bold mr-4">World:</span> {{ World.Name }}</h1>
       <div
         @mouseover="GenesisIsHover = true"
         @mouseleave="GenesisIsHover = false"

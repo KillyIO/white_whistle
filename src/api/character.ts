@@ -1,9 +1,7 @@
-import { Entity, AffiliatedRegion } from './entity';
+import { Entity, FullName, Quote, AffiliatedRegion } from './entity';
 
-interface ICharacter extends Entity {
-  Firstname: string;
-  Middlename: string;
-  Lastname: string;
+interface ICharacter extends Entity, FullName {
+  Quotes: Quote[];
 }
 
 export class Character {
@@ -20,11 +18,14 @@ export class Character {
   private Region?: AffiliatedRegion;
 
   private Firstname!: string;
-  private Middlename!: string;
-  private Lastname!: string;
+  private Middlename?: string;
+  private Lastname?: string;
+
+  private Quotes!: Quote[];
 
   constructor(data?: Partial<ICharacter>) {
     Object.assign(this, data);
+    this.Quotes = new Array<Quote>();
   }
 
   public getId(): number {
@@ -89,5 +90,13 @@ export class Character {
 
   public setLastname(lastname: string): void {
     this.Lastname = lastname;
+  }
+
+  public getQuotes(): Quote[] {
+    return this.Quotes as Quote[];
+  }
+
+  public setQuotes(quote: Quote): void {
+    this.Quotes.push(quote);
   }
 }

@@ -5,6 +5,17 @@ export interface Entity {
   Created: number;
 }
 
+export interface FullName {
+  Firstname: string;
+  Middlename?: string;
+  Lastname?: string;
+}
+
+export interface Quote {
+  Sentence?: string;
+  Author?: string;
+}
+
 export interface AffiliatedWorld {
   Id?: number;
   Name?: string;
