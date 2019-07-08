@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to white-whistle 👋</h1>
 <p>
-  <img src="https://img.shields.io/badge/version-0.2.0-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/version-0.1.2-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/SSebigo/white-whistle#readme">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
   </a>
