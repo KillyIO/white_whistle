@@ -12,7 +12,7 @@
         class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-lg" />
       <img v-else src="@/assets/-erwerwe-e.jpg" alt="derfault world banner">
     </div>
-    <div class="w-full text-center text-2xl font-semibold text-white bg-smoke p-4 absolute bottom-0">
+    <div class="w-full text-center text-2xl font-semibold text-white bg-smoke py-2 px-4 absolute bottom-0">
       <h1>{{ Name }}</h1>
     </div>
   </div>

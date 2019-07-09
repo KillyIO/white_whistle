@@ -18,11 +18,11 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow() {
   // Create the browser window.
-  const dimensions: Electron.Size = screen.getPrimaryDisplay().workAreaSize;
+  // const dimensions: Electron.Size = screen.getPrimaryDisplay().workAreaSize;
 
   win = new BrowserWindow({
-    width: dimensions.width,
-    height: dimensions.height,
+    width: 1280,
+    height: 720,
     frame: false,
     webPreferences: {
       nodeIntegration: true,

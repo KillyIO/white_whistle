@@ -3,10 +3,24 @@
     <!-- Quotes, Overview, Banner -->
     <div class="flex w-full h-screen">
       <section class="w-1/2 text-app-quinary">
-        <h1 class="text-4xl">Quotes</h1>
+        <div
+          @mouseover="QuotesIsHover = true"
+          @mouseleave="QuotesIsHover = false"
+          v-if="!isQuotesEditable" class="flex"
+        >
+          <h1 class="text-4xl mr-4">Quotes</h1>
+          <button
+            v-show="QuotesIsHover"
+            :disabled="isQuotesEditable"
+            @click="onEditQuotes"
+            class="focus:outline-none mt-2"
+          >
+            <font-awesome-icon icon="pen" />
+          </button>
+        </div>
         <h1 class="text-4xl">Overview</h1>
       </section>
-      <section class="w-1/2 h-full relative">
+      <section class="w-1/2 pl-10 h-full relative">
         <label
           @click="onEditImageUrl"
           @mouseover="BannerIsHover = true"
@@ -22,7 +36,7 @@
         </label>
 
         <!-- Name -->
-        <div class="z-10 w-full py-20 text-white absolute bottom-0 bg-smoke-darker text-center">
+        <div class="z-10 w-full py-10 text-white absolute bottom-0 bg-smoke-darker text-center">
           <div
             @mouseover="NameIsHover = true"
             @mouseleave="NameIsHover = false"
@@ -76,7 +90,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
 import Utils from '@/utils';
-import { Character, AffiliatedRegion } from '@/api';
+import { Character, AffiliatedRegion, Quote } from '@/api';
 
 @Component({})
 export default class CharacterProfile extends Vue {
@@ -93,6 +107,7 @@ export default class CharacterProfile extends Vue {
   private Firstname: string = this.character.getFirstname() || '';
   private Middlename: string = this.character.getMiddlename() || '';
   private Lastname: string = this.character.getLastname() || '';
+  private Quotes: Quote[] = this.character.getQuotes();
 
   // isEditable properties
   private isNameEditable: boolean = false;
@@ -100,8 +115,12 @@ export default class CharacterProfile extends Vue {
   private isFirstnameEditable: boolean = false;
   private isMiddleEditable: boolean = false;
   private isLastnameEditable: boolean = false;
-  private BannerIsHover: boolean = false;
+  private isQuotesEditable: boolean = false;
+
+  // hover properties
   private NameIsHover: boolean = false;
+  private BannerIsHover: boolean = false;
+  private QuotesIsHover: boolean = false;
 
   // Computed
   private get nameComputed(): string {
@@ -115,6 +134,10 @@ export default class CharacterProfile extends Vue {
 
   private onEditImageUrl() {
     this.isImageUrlEditable = !this.isImageUrlEditable;
+  }
+
+  private onEditQuotes() {
+    this.isQuotesEditable = !this.isQuotesEditable;
   }
 
   // onSave methods

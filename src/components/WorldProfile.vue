@@ -16,7 +16,7 @@
       </label>
 
       <!-- Name -->
-      <div class="z-10 w-full py-20 text-white absolute bottom-0 bg-smoke-darker text-center">
+      <div class="z-10 w-full py-10 text-white absolute bottom-0 bg-smoke-darker text-center">
         <div
           @mouseover="NameIsHover = true"
           @mouseleave="NameIsHover = false"

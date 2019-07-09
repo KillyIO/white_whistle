@@ -58,7 +58,7 @@ import * as vClickOutside from 'v-click-outside-x';
     clickOutside: vClickOutside.directive,
   },
 })
-export default class AppSidebar extends Vue {
+export default class AppSideBar extends Vue {
   private toggleNav: boolean;
 
   constructor() {

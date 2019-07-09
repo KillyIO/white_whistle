@@ -12,7 +12,7 @@
           class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-lg" />
         <img v-else src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg" alt="derfault world banner">
         <h1
-          class="w-full text-center text-2xl font-semibold text-white bg-smoke p-4 absolute bottom-0">
+          class="w-full text-center text-2xl font-semibold text-white bg-smoke p-2 absolute bottom-0">
           {{ Name }}
         </h1>
       </div>
