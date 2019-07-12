@@ -1,83 +1,96 @@
 <template>
-  <div class="w-full h-screen py-20 px-10 force-overflow-main">
-    <!-- Quotes, Overview, Banner -->
-    <div class="flex w-full h-screen">
-      <section class="w-1/2 text-app-quinary">
-        <div
-          @mouseover="QuotesIsHover = true"
-          @mouseleave="QuotesIsHover = false"
-          v-if="!isQuotesEditable" class="flex"
-        >
-          <h1 class="text-4xl mr-4">Quotes</h1>
-          <button
-            v-show="QuotesIsHover"
-            :disabled="isQuotesEditable"
-            @click="onEditQuotes"
-            class="focus:outline-none mt-2"
-          >
-            <font-awesome-icon icon="pen" />
-          </button>
-        </div>
-        <h1 class="text-4xl">Overview</h1>
-      </section>
-      <section class="w-1/2 pl-10 h-full relative">
-        <label
-          @click="onEditImageUrl"
-          @mouseover="BannerIsHover = true"
-          @mouseleave="BannerIsHover = false"
-          class="w-full h-screen flex flex-col items-center justify-center bg-app-primary shadow-lg rounded-lg cursor-pointer opacity-100 hover:opacity-75"
-        >
-          <img
-            :src="ImageUrl"
-            alt="World profile picture"
-            class="flex w-full h-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-t">
-          <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
-          <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
-        </label>
-
-        <!-- Name -->
-        <div class="z-10 w-full py-10 text-white absolute bottom-0 bg-smoke-darker text-center">
+  <div class="">
+    <profile-back-button @click.native="onGoBack" class="" />
+    <div class="w-full max-h-screen py-20 px-10 force-overflow-main">
+      <!-- Quotes, Overview, Banner -->
+      <div class="flex w-full">
+        <section class="w-1/2 text-app-quinary">
           <div
-            @mouseover="NameIsHover = true"
-            @mouseleave="NameIsHover = false"
-            v-if="!isNameEditable" class="flex justify-center"
+            @mouseover="QuotesIsHover = true"
+            @mouseleave="QuotesIsHover = false"
+            v-if="!isQuotesEditable" class="flex"
           >
-            <h1 class="text-2xl mx-4 font-semibold tracking-widest">
-              {{ nameComputed }}
-            </h1>
+            <h1 class="text-4xl mr-4">Quotes</h1>
             <button
-              v-show="NameIsHover"
-              :disabled="isNameEditable"
-              @click="onEditName"
-              class="focus:outline-none"
+              v-show="QuotesIsHover"
+              :disabled="isQuotesEditable"
+              @click="onEditQuotes"
+              class="focus:outline-none mt-2"
             >
               <font-awesome-icon icon="pen" />
             </button>
           </div>
-          <div v-else class="">
-            <div class="flex flex-col items-center mb-4">
-              <input v-model="Firstname" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
-              <input v-model="Middlename" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
-              <input v-model="Lastname" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
-            </div>
-            <div>
-              <button
-                @click="isNameEditable = false"
-                class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+          <h1 class="text-4xl">Overview</h1>
+        </section>
+        <section class="w-1/2">
+          <div class="relative">
+            <label
+              @click="onEditImageUrl"
+              @mouseover="BannerIsHover = true"
+              @mouseleave="BannerIsHover = false"
+              class="w-full flex flex-col items-center justify-center bg-app-primary shadow-lg rounded-lg cursor-pointer opacity-100 hover:opacity-75"
+            >
+              <img
+                :src="ImageUrl"
+                alt="World profile picture"
+                class="flex w-full overflow-hidden relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded-t">
+              <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
+              <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
+            </label>
+
+            <!-- Name -->
+            <div class="z-10 w-full py-10 text-white bottom-0 absolute bg-smoke-darker text-center">
+              <div
+                @mouseover="NameIsHover = true"
+                @mouseleave="NameIsHover = false"
+                v-if="!isNameEditable" class="flex justify-center"
               >
-                Cancel
-              </button>
-              <button
-                @click="onNameSave"
-                class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-              >
-                Save
-              </button>
+                <h1 class="text-2xl mx-4 font-semibold tracking-widest">
+                  {{ nameComputed }}
+                </h1>
+                <button
+                  v-show="NameIsHover"
+                  :disabled="isNameEditable"
+                  @click="onEditName"
+                  class="focus:outline-none"
+                >
+                  <font-awesome-icon icon="pen" />
+                </button>
+              </div>
+              <div v-else class="">
+                <div class="flex flex-col items-center mb-4">
+                  <input v-model="Firstname" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
+                  <input v-model="Middlename" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
+                  <input v-model="Lastname" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
+                </div>
+                <div>
+                  <button
+                    @click="isNameEditable = false"
+                    class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    @click="onNameSave"
+                    class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+              <h2 class="text-2xl mt-2 text-app-quinary">{{ Region.Name }}</h2>
             </div>
           </div>
-          <h2 class="text-2xl mt-2 text-app-quinary">{{ Region.Name }}</h2>
-        </div>
-      </section>
+          <div class="w-full rounded-b bg-app-secondary-light text-center text-app-quinary">
+            <h1 class="text-2xl py-2">Profile</h1>
+            <div class="flex w-full mx-10">
+              <p class="font-bold">Alias</p>
+              <ul class="">
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 </template>
@@ -92,7 +105,13 @@ import { Prop } from 'vue-property-decorator';
 import Utils from '@/utils';
 import { Character, AffiliatedRegion, Quote } from '@/api';
 
-@Component({})
+import ProfileBackButton from '@/components/ProfileBackButton.vue';
+
+@Component({
+  components: {
+    ProfileBackButton,
+  },
+})
 export default class CharacterProfile extends Vue {
   @Prop() private Id!: number;
 
@@ -158,6 +177,12 @@ export default class CharacterProfile extends Vue {
       this.ImageUrl = event.target.result;
     };
     reader.readAsDataURL(file);
+  }
+
+  private onGoBack() {
+    if (window.history.length > 1) {
+      this.$router.go(-1);
+    }
   }
 }
 </script>

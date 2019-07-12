@@ -50,3 +50,15 @@ button {
 .force-overflow-content::-webkit-scrollbar-track {
   background-color: #302B38;
 }
+
+.character-thumbnail-width {
+  max-width: 60.0625rem;
+}
+
+.character-thumbnail-height {
+  max-height: 75rem;
+}
+
+.masonry-grid {
+  position: relative;
+}

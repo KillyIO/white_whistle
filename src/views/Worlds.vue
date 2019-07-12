@@ -5,7 +5,7 @@
         class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"
       >Worlds</h1>
       <p v-if="isWorldsListEmptyComputed" class="text-center text-2xl mt-20">Data missing...</p>
-      <ul v-else class="flex flex-wrap w-full">
+      <ul v-else class="masonry-grid">
         <world-card
           v-for="world in filteredWorldsComputed"
           :key="world.Id"
@@ -24,8 +24,9 @@
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { World } from '@/api';
+import Macy from 'macy';
 
+import { World } from '@/api';
 import WorldCard from '@/components/WorldCard.vue';
 
 @Component({
@@ -36,6 +37,7 @@ import WorldCard from '@/components/WorldCard.vue';
 export default class Worlds extends Vue {
   private filteredWorlds: object[];
   private isWorldsListEmpty: boolean;
+  private macyGrid: any;
 
   constructor() {
     super();
@@ -46,6 +48,16 @@ export default class Worlds extends Vue {
 
   private created() {
     console.log(this.$route.name);
+  }
+
+  private mounted() {
+    this.macyGrid = Macy({
+      container: '.masonry-grid',
+      trueOrder: false,
+      waitForImages: true,
+      margin: 0,
+      columns: 4,
+    });
   }
 
   private get filteredWorldsComputed(): object[] {

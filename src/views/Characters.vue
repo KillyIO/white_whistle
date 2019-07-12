@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen text-app-quinary force-overflow-main">
+  <div class="text-app-quinary force-overflow-main">
     <div class="container mx-auto px-2 py-8">
       <h1
         class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"
       >Characters</h1>
       <p v-if="isCharactersListEmptyComputed" class="text-center text-2xl mt-20">Data missing...</p>
-      <ul else>
+      <ul v-else class="masonry-grid">
         <character-card
           v-for="character in filteredCharactersComputed"
           :key="character.Id"
@@ -27,6 +27,7 @@
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import Macy from 'macy';
 
 import CharacterCard from '@/components/CharacterCard.vue';
 
@@ -38,6 +39,7 @@ import CharacterCard from '@/components/CharacterCard.vue';
 export default class Characters extends Vue {
   private filteredCharacters: object[];
   private isCharactersListEmpty: boolean;
+  private macyGrid: any;
 
   constructor() {
     super();
@@ -48,6 +50,16 @@ export default class Characters extends Vue {
 
   private created() {
     console.log(this.$route.name);
+  }
+
+  private mounted() {
+    this.macyGrid = Macy({
+      container: '.masonry-grid',
+      trueOrder: false,
+      waitForImages: true,
+      margin: 0,
+      columns: 4,
+    });
   }
 
   private get filteredCharactersComputed(): object[] {

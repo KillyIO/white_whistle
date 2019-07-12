@@ -5,7 +5,7 @@
         class="text-6xl text-center font-semibold border-b-2 border-app-quinary mx-2 mt-12 mb-8"
       >Regions</h1>
       <p v-if="isRegionsListEmptyComputed" class="text-center text-2xl mt-20">Data missing...</p>
-      <ul v-else>
+      <ul v-else class="masonry-grid">
         <region-card
           v-for="region in filteredRegionsComputed"
           :key="region.Id"
@@ -24,6 +24,7 @@
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import Macy from 'macy';
 
 import RegionCard from '@/components/RegionCard.vue';
 
@@ -35,6 +36,7 @@ import RegionCard from '@/components/RegionCard.vue';
 export default class Regions extends Vue {
   private filteredRegions: object[];
   private isRegionsListEmpty: boolean;
+  private macyGrid: any;
 
   constructor() {
     super();
@@ -45,6 +47,16 @@ export default class Regions extends Vue {
 
   private created() {
     console.log(this.$route.name);
+  }
+
+  private mounted() {
+    this.macyGrid = Macy({
+      container: '.masonry-grid',
+      trueOrder: false,
+      waitForImages: true,
+      margin: 0,
+      columns: 4,
+    });
   }
 
   private get filteredRegionsComputed(): object[] {

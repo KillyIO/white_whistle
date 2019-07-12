@@ -3,45 +3,45 @@
     <button
       v-click-outside.capture="closeNav"
       @click="onToggleNav"
-      class="m-2 mt-2 text-app-quinary outline-none"
+      class="m-2 mt-2 text-app-quinary focus:outline-none"
     >
-      <font-awesome-icon v-if="toggleNav" icon="times" size="2x" />
-      <font-awesome-icon v-else icon="bars" size="2x" />
+      <font-awesome-icon v-if="toggleNav" icon="times" />
+      <font-awesome-icon v-else icon="bars" />
     </button>
     <ul v-show="toggleNav" class="flex text-center">
-      <router-link tag="li" to="/home" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/home" class="m-2 text-app-quinary">
         <a class="">
-          <font-awesome-icon icon="home" size="2x" />
+          <font-awesome-icon icon="home" />
         </a>
       </router-link>
-      <router-link tag="li" to="/worlds" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/worlds" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="globe" size="2x" />
+          <font-awesome-icon icon="globe" />
         </a>
       </router-link>
-      <router-link tag="li" to="/regions" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/regions" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="map-marked-alt" size="2x" />
+          <font-awesome-icon icon="map-marked-alt" />
         </a>
       </router-link>
-      <router-link tag="li" to="/characters" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/characters" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="users" size="2x" />
+          <font-awesome-icon icon="users" />
         </a>
       </router-link>
-      <router-link tag="li" to="/artifacts" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/artifacts" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="scroll" size="2x" />
+          <font-awesome-icon icon="scroll" />
         </a>
       </router-link>
-      <router-link tag="li" to="/new-entity" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/new-entity" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="plus" size="2x" />
+          <font-awesome-icon icon="plus" />
         </a>
       </router-link>
-      <router-link tag="li" to="/search" class="m-2 mt-2 text-app-quinary">
+      <router-link tag="li" to="/search" class="m-2 text-app-quinary">
         <a>
-          <font-awesome-icon icon="search" size="2x" />
+          <font-awesome-icon icon="search" />
         </a>
       </router-link>
     </ul>
