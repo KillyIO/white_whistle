@@ -1,28 +1,39 @@
 <template>
-  <div id="titlebar" class="fixed w-full h-5 text-app-quinary bg-app-secondary-lighter shadow-lg overflow-y-hidden">
-    <section class="float-left mx-2">
-      <h1 class="text-sm font-semibold">White Whistle</h1>
-    </section>
-    <section class="float-right mx-1">
+  <div id="titlebar" class="fixed w-full h-8 text-app-quinary bg-app-secondary-darker shadow-xl overflow-y-hidden">
+    <section class="float-left mx-2 align-middle flex h-full items-center">
       <button
-        @click="close"
-        class="float-right px-2 text-sm hover:bg-app-tertiary focus:outline-none"
+        @click="onToggleNavModal"
+        class="text-lg mx-2 hover:text-app-tertiary focus:outline-none"
       >
-        <font-awesome-icon icon="times" />
+        <font-awesome-icon icon="bars" />
+      </button>
+      <h1 class="text-base mx-2  font-semibold">WHITE WHISTLE</h1>
+    </section>
+    <section class="float-right mx-2 align-middle flex h-full">
+      <button
+        @click="minimize"
+        class="text-base float-right mx-2 text-sm hover:text-app-tertiary focus:outline-none"
+      >
+        <font-awesome-icon icon="window-minimize" />
       </button>
       <button
         @click="maximize"
-        class="float-right px-2 text-sm hover:bg-app-tertiary focus:outline-none"
+        class="text-base float-right mx-2 text-sm hover:text-app-tertiary focus:outline-none"
       >
         <font-awesome-icon icon="window-maximize" />
       </button>
       <button
-        @click="minimize"
-        class="float-right px-2 text-sm hover:bg-app-tertiary focus:outline-none"
+        @click="close"
+        class="text-xl float-right mx-2 text-sm hover:text-app-tertiary focus:outline-none"
       >
-        <font-awesome-icon icon="window-minimize" />
+        <font-awesome-icon icon="times" />
       </button>
     </section>
+    <app-nav-modal
+      v-on:close-modal="onToggleNavModal"
+      v-show="toggleNavModal"
+    >
+    </app-nav-modal>
   </div>
 </template>
 
@@ -32,13 +43,21 @@ import Component from 'vue-class-component';
 
 import { remote } from 'electron';
 
-@Component({})
+import NavModal from '@/components/NavModal.vue';
+
+@Component({
+  components: {
+    'app-nav-modal': NavModal,
+  },
+})
 export default class AppTitleBar extends Vue {
   private currentWindow: Electron.BrowserWindow;
+  private toggleNavModal: boolean;
 
   constructor() {
     super();
     this.currentWindow = remote.getCurrentWindow();
+    this.toggleNavModal = false;
   }
 
   private minimize(): void {
@@ -55,6 +74,10 @@ export default class AppTitleBar extends Vue {
 
   private close(): void {
     this.currentWindow.close();
+  }
+
+  private onToggleNavModal(): void {
+    this.toggleNavModal = !this.toggleNavModal;
   }
 }
 </script>

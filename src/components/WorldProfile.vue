@@ -10,15 +10,20 @@
           class="w-full flex flex-col items-center justify-center bg-app-primary shadow-lg rounded-lg cursor-pointer opacity-100 hover:opacity-75"
         >
           <img
+            v-if="imageUrl"
             :src="ImageUrl"
             alt="world banner"
+            class="flex w-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
+          <img
+            src="@/assets/jan-urschel-gis-ju-deepdive01-d1.jpg"
+            alt="default world banner"
             class="flex w-full relative bg-no-repeat bg-cover m-0 p-0 items-center justify-around rounded">
           <input @change="onImageUrlChange($event.target.files[0])" type="file" name="Image" class="hidden">
           <font-awesome-icon v-if="BannerIsHover" icon="camera" size="8x" class="absolute opacity-50" />
         </label>
 
         <!-- Name -->
-        <div class="z-10 w-full py-10 text-white absolute bottom-0 bg-smoke-darker text-center">
+        <div class="z-10 w-full py-2 text-white absolute bottom-0 bg-smoke text-center">
           <div
             @mouseover="NameIsHover = true"
             @mouseleave="NameIsHover = false"
@@ -38,20 +43,9 @@
           </div>
           <div v-else class="">
             <input v-model="Name" type="text" name="Name" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
-            <div>
-              <button
-                @click="isNameEditable = false"
-                class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-              >
-                Cancel
-              </button>
-              <button
-                @click="onNameSave"
-                class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-              >
-                Save
-              </button>
-            </div>
+            <editable-field-footer
+              v-on:update-editable-state="isNameEditable = false"
+              v-on:save="onNameSave" />
           </div>
         </div>
       </section>
@@ -84,24 +78,14 @@
         <div v-else class="scrollbar">
           <textarea
             v-model="Creation"
-            name="Creation"
             cols="100"
             rows="10"
             class="p-2 bg-app-secondary-light focus:outline-none shadow-lg resize-none force-overflow-content"
           />
           <div class="flex justify-center my-4">
-            <button
-              @click="isCreationEditable = false"
-              class="shadow-md rounded mx-8 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-            >
-              Cancel
-            </button>
-            <button
-              @click="onCreationSave"
-              class="shadow-md rounded mx-8 py-2 px-8 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-            >
-              Save
-            </button>
+            <editable-field-footer
+              v-on:update-editable-state="isCreationEditable = false"
+              v-on:save="onCreationSave" />
           </div>
         </div>
       </section>
@@ -123,10 +107,12 @@ import Utils from '@/utils';
 import { World } from '@/api';
 
 import ProfileBackButton from '@/components/ProfileBackButton.vue';
+import EditableFieldFooter from '@/components/EditableFieldFooter.vue';
 
 @Component({
   components: {
     ProfileBackButton,
+    EditableFieldFooter,
   },
 })
 export default class WorldProfile extends Vue {

@@ -24,7 +24,7 @@ npm install
 
 ## Author
 
-👤 **François Grèzes <grezesfrancois@gmail.com>**
+👤 **SSebigo <killy.sebigo@gmail.com>**
 
 * Github: [@SSebigo](https://github.com/SSebigo)
 
@@ -38,7 +38,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [François Grèzes <grezesfrancois@gmail.com>](https://github.com/SSebigo).<br />
+Copyright © 2019 [SSebigo <killy.sebigo@gmail.com>](https://github.com/SSebigo).<br />
 This project is [MIT](https://github.com/SSebigo/white-whistle/blob/master/LICENSE) licensed.
 
 ***

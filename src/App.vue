@@ -4,7 +4,7 @@
       <app-title-bar />
     </header>
     <body class="sticky top-0">
-      <app-side-bar class="fixed mt-5" />
+      <!-- <app-side-bar class="fixed mt-5" /> -->
       <div class="w-full h-full mt-5">
         <router-view></router-view>
       </div>
@@ -16,12 +16,12 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-import AppSideBar from '@/components/AppSideBar.vue';
+// import NavModal from '@/components/NavModal.vue';
 import AppTitleBar from '@/components/AppTitleBar.vue';
 
 @Component({
   components: {
-    AppSideBar,
+    // NavModal,
     AppTitleBar,
   },
 })

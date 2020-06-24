@@ -8,7 +8,7 @@
           <div
             @mouseover="QuotesIsHover = true"
             @mouseleave="QuotesIsHover = false"
-            v-if="!isQuotesEditable" class="flex"
+            class="flex"
           >
             <h1 class="text-4xl mr-4">Quotes</h1>
             <button
@@ -19,6 +19,20 @@
             >
               <font-awesome-icon icon="pen" />
             </button>
+          </div>
+          <div v-show="isQuotesEditable" class="my-4">
+            <textarea
+              cols="50"
+              rows="5"
+              class="p-2 bg-app-secondary-light focus:outline-none shadow-lg resize-none force-overflow-content"
+            />
+            <!-- <input type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary"> about {{ Firstname }}
+            <br/>
+            {{ Firstname }} to <input type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary"> -->
+            <editable-field-footer
+              v-on:update-editable-state="isQuotesEditable = false"
+              v-on:save="onQuoteSave"
+              class=""/>
           </div>
           <h1 class="text-4xl">Overview</h1>
         </section>
@@ -39,7 +53,7 @@
             </label>
 
             <!-- Name -->
-            <div class="z-10 w-full py-10 text-white bottom-0 absolute bg-smoke-darker text-center">
+            <div class="z-10 w-full py-10 text-white bottom-0 absolute bg-smoke text-center">
               <div
                 @mouseover="NameIsHover = true"
                 @mouseleave="NameIsHover = false"
@@ -63,30 +77,21 @@
                   <input v-model="Middlename" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
                   <input v-model="Lastname" type="text" class="w-64 text-lg bg-smoke-lightest border-b-4 p-2 mt-2 mb-4 focus:outline-none focus:border-app-tertiary" />
                 </div>
-                <div>
-                  <button
-                    @click="isNameEditable = false"
-                    class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    @click="onNameSave"
-                    class="shadow-md rounded mx-4 py-2 px-6 bg-app-tertiary hover:bg-app-primary font-semibold text-white"
-                  >
-                    Save
-                  </button>
-                </div>
+                <editable-field-footer
+                  v-on:update-editable-state="isNameEditable = false"
+                  v-on:save="onNameSave" />
               </div>
               <h2 class="text-2xl mt-2 text-app-quinary">{{ Region.Name }}</h2>
             </div>
           </div>
-          <div class="w-full rounded-b bg-app-secondary-light text-center text-app-quinary">
-            <h1 class="text-2xl py-2">Profile</h1>
-            <div class="flex w-full mx-10">
+          <div class="w-full rounded-b bg-app-secondary-light text-center text-app-quinary py-4">
+            <h1 class="text-2xl">Profile</h1>
+            <div class="flex w-full mx-10 my-2">
               <p class="font-bold">Alias</p>
               <ul class="">
               </ul>
+              <p>Date of birth</p>
+              <p>Age</p>
             </div>
           </div>
         </section>
@@ -106,10 +111,12 @@ import Utils from '@/utils';
 import { Character, AffiliatedRegion, Quote } from '@/api';
 
 import ProfileBackButton from '@/components/ProfileBackButton.vue';
+import EditableFieldFooter from '@/components/EditableFieldFooter.vue';
 
 @Component({
   components: {
     ProfileBackButton,
+    EditableFieldFooter,
   },
 })
 export default class CharacterProfile extends Vue {
@@ -167,6 +174,10 @@ export default class CharacterProfile extends Vue {
     this.character.setMiddlename(this.Middlename);
     this.character.setLastname(this.Lastname);
     this.isNameEditable = !this.isNameEditable;
+  }
+
+  private onQuoteSave() {
+    console.log('quote saved');
   }
 
   // onChange
