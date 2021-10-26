@@ -1,47 +1,16 @@
-<h1 align="center">Welcome to white-whistle 👋</h1>
-<p>
-  <img src="https://img.shields.io/badge/version-0.1.2-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/SSebigo/white-whistle#readme">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
-  </a>
-  <a href="https://github.com/SSebigo/white-whistle/graphs/commit-activity">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
-  </a>
-  <a href="https://github.com/SSebigo/white-whistle/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
-  </a>
-</p>
+# white_whistle
 
-> White Whistle is a worldbuilding software for worldbuilder and everyone else.
+A new Flutter project.
 
-## STATUS: ONGOING
+## Getting Started
 
-### 🏠 [Homepage](https://github.com/SSebigo/white-whistle#readme)
+This project is a starting point for a Flutter application.
 
-## Install
+A few resources to get you started if this is your first Flutter project:
 
-```sh
-npm install
-```
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-## Author
-
-👤 **SSebigo <killy.sebigo@gmail.com>**
-
-* Github: [@SSebigo](https://github.com/SSebigo)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/SSebigo/white-whistle/issues).
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-## 📝 License
-
-Copyright © 2019 [SSebigo <killy.sebigo@gmail.com>](https://github.com/SSebigo).<br />
-This project is [MIT](https://github.com/SSebigo/white-whistle/blob/master/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
