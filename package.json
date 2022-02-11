@@ -56,7 +56,7 @@
     "babel-core": "6.26.3",
     "electron": "^11.5.0",
     "lint-staged": "^10.2.11",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
     "tailwindcss": "^1.4.6",
     "ts-jest": "^26.1.1",
