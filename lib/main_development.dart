@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -17,15 +19,16 @@ Future<void> main() async {
     configureInjection(Environment.dev),
   ]);
 
-  await windowManager.waitUntilReadyToShow();
-
-  await Future.wait([
-    windowManager.setTitle(F.title),
-    windowManager.setTitleBarStyle('hidden'),
-    windowManager.setSize(const Size(1280, 720)),
-    windowManager.center(),
-    windowManager.show(),
-  ]);
+  unawaited(
+    windowManager.waitUntilReadyToShow().whenComplete(() async {
+      await windowManager.setTitle(F.title);
+      await windowManager.setTitleBarStyle('visible');
+      await windowManager.setSize(const Size(1280, 720));
+      await windowManager.center();
+      await windowManager.show();
+      await windowManager.setSkipTaskbar(false);
+    }),
+  );
 
   BlocOverrides.runZoned(
     () => runApp(AppDevelopment()),
