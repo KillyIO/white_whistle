@@ -7,4 +7,5 @@ final getIt = GetIt.instance;
 
 /// @nodoc
 @InjectableInit()
-void configureInjection() => $initGetIt(getIt);
+Future<void> configureInjection(String env) =>
+    $initGetIt(getIt, environment: env);

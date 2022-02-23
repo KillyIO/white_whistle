@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:white_whistle/presentation/home/home_layout.dart';
 
 /// @nodoc
 class HomePage extends StatelessWidget {
@@ -8,6 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeLayout();
+    return Scaffold();
   }
 }
