@@ -9,7 +9,7 @@ export 'router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute<HomePage>(
       page: HomePage,
-      path: homePath,
+      path: homePagePath,
       initial: true,
     ),
   ],
