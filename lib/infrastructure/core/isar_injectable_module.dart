@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:white_whistle/flavors.dart';
 import 'package:white_whistle/infrastructure/settings/isar_settings.dart';
@@ -16,7 +17,10 @@ abstract class IIsarInjectableModule {
     final isar = await Isar.open(
       inspector: F.appFlavor == Flavor.development,
       schemas: [IsarSettingsSchema],
-      directory: (await getApplicationDocumentsDirectory()).path,
+      directory: p.join(
+        (await getApplicationDocumentsDirectory()).path,
+        'White Whistle',
+      ),
     );
 
     return isar;
