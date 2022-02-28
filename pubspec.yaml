@@ -20,6 +20,7 @@ dependencies:
   injectable: ^1.5.3
   isar: ^2.2.1
   isar_flutter_libs: ^2.2.1
+  json_annotation: ^4.4.0
   logger: ^1.1.0
   oxidized: ^5.2.0
   path_provider: ^2.0.9
@@ -38,6 +39,7 @@ dev_dependencies:
   freezed: ^1.1.1
   injectable_generator: ^1.5.3
   isar_generator: ^2.2.1
+  json_serializable: ^6.1.4
   very_good_analysis: ^2.4.0
 
 flavorizr:

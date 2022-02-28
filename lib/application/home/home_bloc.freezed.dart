@@ -177,7 +177,7 @@ abstract class Init implements HomeEvent {
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  _HomeState call({required List<dynamic> worlds}) {
+  _HomeState call({required List<World> worlds}) {
     return _HomeState(
       worlds: worlds,
     );
@@ -189,7 +189,7 @@ const $HomeState = _$HomeStateTearOff();
 
 /// @nodoc
 mixin _$HomeState {
-  List<dynamic> get worlds => throw _privateConstructorUsedError;
+  List<World> get worlds => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -200,7 +200,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({List<dynamic> worlds});
+  $Res call({List<World> worlds});
 }
 
 /// @nodoc
@@ -219,7 +219,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
       worlds: worlds == freezed
           ? _value.worlds
           : worlds // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<World>,
     ));
   }
 }
@@ -230,7 +230,7 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<dynamic> worlds});
+  $Res call({List<World> worlds});
 }
 
 /// @nodoc
@@ -250,7 +250,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       worlds: worlds == freezed
           ? _value.worlds
           : worlds // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<World>,
     ));
   }
 }
@@ -261,7 +261,7 @@ class _$_HomeState implements _HomeState {
   const _$_HomeState({required this.worlds});
 
   @override
-  final List<dynamic> worlds;
+  final List<World> worlds;
 
   @override
   String toString() {
@@ -287,10 +287,10 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({required List<dynamic> worlds}) = _$_HomeState;
+  const factory _HomeState({required List<World> worlds}) = _$_HomeState;
 
   @override
-  List<dynamic> get worlds;
+  List<World> get worlds;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>
