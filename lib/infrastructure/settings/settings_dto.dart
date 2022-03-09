@@ -10,7 +10,7 @@ part 'settings_dto.g.dart';
 class SettingsDTO with _$SettingsDTO {
   /// @nodoc
   factory SettingsDTO({
-    required bool? toggleDarkMode,
+    required bool toggleDarkMode,
   }) = _SettingsDTO;
 
   /// @nodoc
@@ -41,6 +41,7 @@ extension SettingsDTOX on SettingsDTO {
 
   /// @nodoc
   IsarSettings toAdapter() => IsarSettings(
+        id: 0,
         toggleDarkMode: toggleDarkMode,
       );
 }

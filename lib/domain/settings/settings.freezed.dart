@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SettingsTearOff {
   const _$SettingsTearOff();
 
-  _Settings call({required bool? toggleDarkMode}) {
+  _Settings call({required bool toggleDarkMode}) {
     return _Settings(
       toggleDarkMode: toggleDarkMode,
     );
@@ -30,7 +30,7 @@ const $Settings = _$SettingsTearOff();
 
 /// @nodoc
 mixin _$Settings {
-  bool? get toggleDarkMode => throw _privateConstructorUsedError;
+  bool get toggleDarkMode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -41,7 +41,7 @@ mixin _$Settings {
 abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res>;
-  $Res call({bool? toggleDarkMode});
+  $Res call({bool toggleDarkMode});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$SettingsCopyWithImpl<$Res> implements $SettingsCopyWith<$Res> {
       toggleDarkMode: toggleDarkMode == freezed
           ? _value.toggleDarkMode
           : toggleDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -70,7 +70,7 @@ abstract class _$SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
   factory _$SettingsCopyWith(_Settings value, $Res Function(_Settings) then) =
       __$SettingsCopyWithImpl<$Res>;
   @override
-  $Res call({bool? toggleDarkMode});
+  $Res call({bool toggleDarkMode});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$SettingsCopyWithImpl<$Res> extends _$SettingsCopyWithImpl<$Res>
       toggleDarkMode: toggleDarkMode == freezed
           ? _value.toggleDarkMode
           : toggleDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -101,7 +101,7 @@ class _$_Settings implements _Settings {
   const _$_Settings({required this.toggleDarkMode});
 
   @override
-  final bool? toggleDarkMode;
+  final bool toggleDarkMode;
 
   @override
   String toString() {
@@ -128,10 +128,10 @@ class _$_Settings implements _Settings {
 }
 
 abstract class _Settings implements Settings {
-  const factory _Settings({required bool? toggleDarkMode}) = _$_Settings;
+  const factory _Settings({required bool toggleDarkMode}) = _$_Settings;
 
   @override
-  bool? get toggleDarkMode;
+  bool get toggleDarkMode;
   @override
   @JsonKey(ignore: true)
   _$SettingsCopyWith<_Settings> get copyWith =>

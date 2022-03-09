@@ -8,7 +8,7 @@ part of 'settings_dto.dart';
 
 _$_SettingsDTO _$$_SettingsDTOFromJson(Map<String, dynamic> json) =>
     _$_SettingsDTO(
-      toggleDarkMode: json['toggleDarkMode'] as bool?,
+      toggleDarkMode: json['toggleDarkMode'] as bool,
     );
 
 Map<String, dynamic> _$$_SettingsDTOToJson(_$_SettingsDTO instance) =>

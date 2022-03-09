@@ -22,7 +22,7 @@ SettingsDTO _$SettingsDTOFromJson(Map<String, dynamic> json) {
 class _$SettingsDTOTearOff {
   const _$SettingsDTOTearOff();
 
-  _SettingsDTO call({required bool? toggleDarkMode}) {
+  _SettingsDTO call({required bool toggleDarkMode}) {
     return _SettingsDTO(
       toggleDarkMode: toggleDarkMode,
     );
@@ -38,7 +38,7 @@ const $SettingsDTO = _$SettingsDTOTearOff();
 
 /// @nodoc
 mixin _$SettingsDTO {
-  bool? get toggleDarkMode => throw _privateConstructorUsedError;
+  bool get toggleDarkMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $SettingsDTOCopyWith<$Res> {
   factory $SettingsDTOCopyWith(
           SettingsDTO value, $Res Function(SettingsDTO) then) =
       _$SettingsDTOCopyWithImpl<$Res>;
-  $Res call({bool? toggleDarkMode});
+  $Res call({bool toggleDarkMode});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$SettingsDTOCopyWithImpl<$Res> implements $SettingsDTOCopyWith<$Res> {
       toggleDarkMode: toggleDarkMode == freezed
           ? _value.toggleDarkMode
           : toggleDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -82,7 +82,7 @@ abstract class _$SettingsDTOCopyWith<$Res>
           _SettingsDTO value, $Res Function(_SettingsDTO) then) =
       __$SettingsDTOCopyWithImpl<$Res>;
   @override
-  $Res call({bool? toggleDarkMode});
+  $Res call({bool toggleDarkMode});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class __$SettingsDTOCopyWithImpl<$Res> extends _$SettingsDTOCopyWithImpl<$Res>
       toggleDarkMode: toggleDarkMode == freezed
           ? _value.toggleDarkMode
           : toggleDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -117,7 +117,7 @@ class _$_SettingsDTO implements _SettingsDTO {
       _$$_SettingsDTOFromJson(json);
 
   @override
-  final bool? toggleDarkMode;
+  final bool toggleDarkMode;
 
   @override
   String toString() {
@@ -149,13 +149,13 @@ class _$_SettingsDTO implements _SettingsDTO {
 }
 
 abstract class _SettingsDTO implements SettingsDTO {
-  factory _SettingsDTO({required bool? toggleDarkMode}) = _$_SettingsDTO;
+  factory _SettingsDTO({required bool toggleDarkMode}) = _$_SettingsDTO;
 
   factory _SettingsDTO.fromJson(Map<String, dynamic> json) =
       _$_SettingsDTO.fromJson;
 
   @override
-  bool? get toggleDarkMode;
+  bool get toggleDarkMode;
   @override
   @JsonKey(ignore: true)
   _$SettingsDTOCopyWith<_SettingsDTO> get copyWith =>

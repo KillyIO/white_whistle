@@ -58,8 +58,8 @@ class _IsarSettingsWebAdapter extends IsarWebTypeAdapter<IsarSettings> {
   IsarSettings deserialize(
       IsarCollection<IsarSettings> collection, dynamic jsObj) {
     final object = IsarSettings(
-      id: IsarNative.jsObjectGet(jsObj, 'id'),
-      toggleDarkMode: IsarNative.jsObjectGet(jsObj, 'toggleDarkMode'),
+      id: IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity,
+      toggleDarkMode: IsarNative.jsObjectGet(jsObj, 'toggleDarkMode') ?? false,
     );
     return object;
   }
@@ -71,11 +71,12 @@ class _IsarSettingsWebAdapter extends IsarWebTypeAdapter<IsarSettings> {
         return (IsarNative.jsObjectGet(jsObj, 'hashCode') ??
             double.negativeInfinity) as P;
       case 'id':
-        return (IsarNative.jsObjectGet(jsObj, 'id')) as P;
+        return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
+            as P;
       case 'stringify':
         return (IsarNative.jsObjectGet(jsObj, 'stringify') ?? false) as P;
       case 'toggleDarkMode':
-        return (IsarNative.jsObjectGet(jsObj, 'toggleDarkMode')) as P;
+        return (IsarNative.jsObjectGet(jsObj, 'toggleDarkMode') ?? false) as P;
       default:
         throw 'Illegal propertyName';
     }
@@ -119,7 +120,7 @@ class _IsarSettingsNativeAdapter extends IsarNativeTypeAdapter<IsarSettings> {
       IsarBinaryReader reader, List<int> offsets) {
     final object = IsarSettings(
       id: id,
-      toggleDarkMode: reader.readBoolOrNull(offsets[2]),
+      toggleDarkMode: reader.readBool(offsets[2]),
     );
     return object;
   }
@@ -135,7 +136,7 @@ class _IsarSettingsNativeAdapter extends IsarNativeTypeAdapter<IsarSettings> {
       case 1:
         return (reader.readBool(offset)) as P;
       case 2:
-        return (reader.readBoolOrNull(offset)) as P;
+        return (reader.readBool(offset)) as P;
       default:
         throw 'Illegal propertyIndex';
     }
@@ -155,7 +156,7 @@ extension IsarSettingsQueryWhereSort
 extension IsarSettingsQueryWhere
     on QueryBuilder<IsarSettings, IsarSettings, QWhereClause> {
   QueryBuilder<IsarSettings, IsarSettings, QAfterWhereClause> idEqualTo(
-      int? id) {
+      int id) {
     return addWhereClauseInternal(WhereClause(
       indexName: null,
       lower: [id],
@@ -166,7 +167,7 @@ extension IsarSettingsQueryWhere
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterWhereClause> idNotEqualTo(
-      int? id) {
+      int id) {
     if (whereSortInternal == Sort.asc) {
       return addWhereClauseInternal(WhereClause(
         indexName: null,
@@ -191,7 +192,7 @@ extension IsarSettingsQueryWhere
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterWhereClause> idGreaterThan(
-    int? id, {
+    int id, {
     bool include = false,
   }) {
     return addWhereClauseInternal(WhereClause(
@@ -202,7 +203,7 @@ extension IsarSettingsQueryWhere
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterWhereClause> idLessThan(
-    int? id, {
+    int id, {
     bool include = false,
   }) {
     return addWhereClauseInternal(WhereClause(
@@ -213,8 +214,8 @@ extension IsarSettingsQueryWhere
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterWhereClause> idBetween(
-    int? lowerId,
-    int? upperId, {
+    int lowerId,
+    int upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -281,16 +282,8 @@ extension IsarSettingsQueryFilter
     ));
   }
 
-  QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition> idIsNull() {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.isNull,
-      property: 'id',
-      value: null,
-    ));
-  }
-
   QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition> idEqualTo(
-      int? value) {
+      int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -299,7 +292,7 @@ extension IsarSettingsQueryFilter
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition> idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -311,7 +304,7 @@ extension IsarSettingsQueryFilter
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition> idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -323,8 +316,8 @@ extension IsarSettingsQueryFilter
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition> idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -347,16 +340,7 @@ extension IsarSettingsQueryFilter
   }
 
   QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition>
-      toggleDarkModeIsNull() {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.isNull,
-      property: 'toggleDarkMode',
-      value: null,
-    ));
-  }
-
-  QueryBuilder<IsarSettings, IsarSettings, QAfterFilterCondition>
-      toggleDarkModeEqualTo(bool? value) {
+      toggleDarkModeEqualTo(bool value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'toggleDarkMode',
@@ -468,7 +452,7 @@ extension IsarSettingsQueryProperty
     return addPropertyNameInternal('hashCode');
   }
 
-  QueryBuilder<IsarSettings, int?, QQueryOperations> idProperty() {
+  QueryBuilder<IsarSettings, int, QQueryOperations> idProperty() {
     return addPropertyNameInternal('id');
   }
 
@@ -476,7 +460,7 @@ extension IsarSettingsQueryProperty
     return addPropertyNameInternal('stringify');
   }
 
-  QueryBuilder<IsarSettings, bool?, QQueryOperations> toggleDarkModeProperty() {
+  QueryBuilder<IsarSettings, bool, QQueryOperations> toggleDarkModeProperty() {
     return addPropertyNameInternal('toggleDarkMode');
   }
 }

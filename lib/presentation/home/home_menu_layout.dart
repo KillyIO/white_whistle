@@ -34,13 +34,13 @@ class HomeMenuLayout extends StatelessWidget {
           itemBuilder: (_, i) => ListTile(
             leading: Icon(
               menu.elementAt(i).icon,
-              color: Colors.black,
+              color: Theme.of(context).primaryColor,
             ),
             title: Text(
               menu.elementAt(i).key,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w700,
                 letterSpacing: .5,
               ),
@@ -54,20 +54,17 @@ class HomeMenuLayout extends StatelessWidget {
                 state.themeMode == ThemeMode.light
                     ? Icons.light_mode_outlined
                     : Icons.dark_mode_outlined,
-                color: state.themeMode == ThemeMode.light
-                    ? Colors.black
-                    : Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
               title: Text(
                 state.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark mode',
                 style: TextStyle(
-                  color: state.themeMode == ThemeMode.light
-                      ? Colors.black
-                      : Colors.white,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w700,
                   letterSpacing: .5,
                 ),
               ),
+              onTap: context.read<ThemeCubit>().toggleDarkMode,
             );
           },
         ),

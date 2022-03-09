@@ -9,40 +9,40 @@ part 'isar_settings.g.dart';
 class IsarSettings extends Equatable {
   /// @nodoc
   const IsarSettings({
-    this.toggleDarkMode,
-    this.id,
+    required this.id,
+    required this.toggleDarkMode,
   });
 
   /// @nodoc
   factory IsarSettings.fromMap(Map<String, dynamic> map) {
     return IsarSettings(
-      toggleDarkMode: map['toggleDarkMode'] as bool,
       id: map['id'] as int,
+      toggleDarkMode: map['toggleDarkMode'] as bool,
     );
   }
 
   /// @nodoc
-  final bool? toggleDarkMode;
+  final int id;
 
   /// @nodoc
-  final int? id;
+  final bool toggleDarkMode;
 
   /// @nodoc
   IsarSettings copyWith({
-    bool? toggleDarkMode,
     int? id,
+    bool? toggleDarkMode,
   }) {
     return IsarSettings(
-      toggleDarkMode: toggleDarkMode ?? this.toggleDarkMode,
       id: id ?? this.id,
+      toggleDarkMode: toggleDarkMode ?? this.toggleDarkMode,
     );
   }
 
   /// @nodoc
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'toggleDarkMode': toggleDarkMode,
       'id': id,
+      'toggleDarkMode': toggleDarkMode,
     };
   }
 
@@ -54,10 +54,7 @@ class IsarSettings extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        toggleDarkMode,
-        id,
-      ];
+  List<Object?> get props => [id, toggleDarkMode];
 
   @override
   bool get stringify => true;

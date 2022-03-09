@@ -7,7 +7,7 @@ part 'settings.freezed.dart';
 class Settings with _$Settings {
   /// @nodoc
   const factory Settings({
-    required bool? toggleDarkMode,
+    required bool toggleDarkMode,
   }) = _Settings;
 
   /// @nodoc

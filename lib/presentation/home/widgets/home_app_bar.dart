@@ -17,17 +17,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(0),
-        child: Container(color: Colors.black, height: 2),
+        child: Container(color: Theme.of(context).dividerColor, height: 2),
       ),
       elevation: 0,
       leading: IconButton(
         key: const Key('home_menu_button'),
-        icon: const Icon(
+        icon: Icon(
           Icons.menu,
-          color: Colors.black,
+          color: Theme.of(context).primaryColor,
         ),
         onPressed: Scaffold.of(context).openDrawer,
       ),
