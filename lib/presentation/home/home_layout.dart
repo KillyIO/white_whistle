@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:white_whistle/application/setup/setup_cubit.dart';
 import 'package:white_whistle/presentation/home/home_menu_layout.dart';
+import 'package:white_whistle/presentation/home/widgets/home_app_bar.dart';
 
 /// @nodoc
 class HomeLayout extends StatelessWidget {
@@ -12,14 +13,12 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-      ),
+      appBar: const HomeAppBar(),
       body: Container(),
       drawer: BlocBuilder<SetupCubit, SetupState>(
         builder: (context, state) {
           return state.maybeMap(
-            content: (_) => const HomeMenuLayout(),
+            content: (_) => HomeMenuLayout(),
             orElse: Container.new,
           );
         },
