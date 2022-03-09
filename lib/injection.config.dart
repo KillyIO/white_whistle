@@ -10,8 +10,9 @@ import 'package:isar/isar.dart' as _i4;
 
 import 'application/home/home_bloc.dart' as _i3;
 import 'application/setup/setup_cubit.dart' as _i7;
+import 'application/theme/theme_cubit.dart' as _i8;
 import 'domain/settings/i_settings_repository.dart' as _i5;
-import 'infrastructure/core/isar_injectable_module.dart' as _i8;
+import 'infrastructure/core/isar_injectable_module.dart' as _i9;
 import 'infrastructure/settings/settings_repository.dart' as _i6;
 
 const String _dev = 'dev';
@@ -32,7 +33,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i7.SetupCubit>(
       () => _i7.SetupCubit(get<_i5.ISettingsRepository>()),
       registerFor: {_dev, _prod});
+  gh.factory<_i8.ThemeCubit>(
+      () => _i8.ThemeCubit(get<_i5.ISettingsRepository>()),
+      registerFor: {_dev, _prod});
   return get;
 }
 
-class _$IIsarInjectableModule extends _i8.IIsarInjectableModule {}
+class _$IIsarInjectableModule extends _i9.IIsarInjectableModule {}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:white_whistle/application/theme/theme_cubit.dart';
 import 'package:white_whistle/domain/core/menu_tile.dart';
 
 /// @nodoc
@@ -44,6 +46,30 @@ class HomeMenuLayout extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        bottomNavigationBar: BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, state) {
+            return ListTile(
+              leading: Icon(
+                state.themeMode == ThemeMode.light
+                    ? Icons.light_mode_outlined
+                    : Icons.dark_mode_outlined,
+                color: state.themeMode == ThemeMode.light
+                    ? Colors.black
+                    : Colors.white,
+              ),
+              title: Text(
+                state.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark mode',
+                style: TextStyle(
+                  color: state.themeMode == ThemeMode.light
+                      ? Colors.black
+                      : Colors.white,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: .5,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
