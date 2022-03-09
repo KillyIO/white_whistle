@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:white_whistle/domain/menu_tile.dart';
+import 'package:white_whistle/domain/core/menu_tile.dart';
 
 /// @nodoc
 class HomeMenuLayout extends StatelessWidget {
