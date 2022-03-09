@@ -22,11 +22,12 @@ class FlavorBanner extends StatelessWidget {
       return child;
     }
     return Banner(
-      color: Colors.green.withOpacity(0.6),
+      color: Colors.green.withOpacity(0.25),
       location: BannerLocation.topStart,
       message: F.name,
       textDirection: TextDirection.ltr,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
+        color: Colors.white.withOpacity(0.5),
         fontWeight: FontWeight.w700,
         fontSize: 12,
         letterSpacing: 1,
