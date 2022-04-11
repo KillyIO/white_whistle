@@ -57,7 +57,7 @@ class HomeMenuLayout extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               title: Text(
-                state.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark mode',
+                '${state.themeMode == ThemeMode.light ? 'Light' : 'Dark'} mode',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w700,

@@ -22,7 +22,7 @@ Future<void> main() async {
   unawaited(
     windowManager.waitUntilReadyToShow().whenComplete(() async {
       await windowManager.setTitle(F.title);
-      await windowManager.setTitleBarStyle('visible');
+      await windowManager.setTitleBarStyle(TitleBarStyle.normal);
       await windowManager.setSize(const Size(1280, 720));
       await windowManager.center();
       await windowManager.show();
