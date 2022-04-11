@@ -12,15 +12,19 @@ class HomeMenuLayout extends StatelessWidget {
   final menu = [
     const MenuTile(
       key: 'characters',
-      icon: Icons.people,
+      icon: Icons.person,
     ),
     const MenuTile(
       key: 'locations',
-      icon: Icons.location_on,
+      icon: Icons.landscape,
+    ),
+    const MenuTile(
+      key: 'universes',
+      icon: Icons.star,
     ),
     const MenuTile(
       key: 'worlds',
-      icon: Icons.public,
+      icon: Icons.language,
     ),
   ];
 
