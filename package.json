@@ -34,7 +34,7 @@
     "edit-json-file": "^1.4.0",
     "macy": "^2.5.1",
     "minireset.css": "0.0.6",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "register-service-worker": "^1.7.1",
     "rsvp": "^4.8.5",
     "tailwindcss-transitions": "^2.2.0",
